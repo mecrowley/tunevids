@@ -26,3 +26,13 @@
     position: relative;
     bottom: -0.8rem;
 }
+
+.video-details {
+    display: flex;
+    display: column;
+}
+
+.video-embed {
+    display: block;
+    margin: 0 auto;
+}

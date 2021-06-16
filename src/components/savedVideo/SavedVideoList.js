@@ -2,7 +2,6 @@ import React, { useContext, useEffect, useState } from "react"
 import { SavedVideoContext } from "./SavedVideoProvider"
 import { YoutubeDataContext } from "../YoutubeDataProvider";
 import "./SavedVideo.css"
-import { Link } from "react-router-dom"
 
 export const SavedVideoList = () => {
     const { getSavedVideosByUser, savedUserVideos, addSavedVideo, deleteSavedVideo } = useContext(SavedVideoContext)
@@ -13,7 +12,7 @@ export const SavedVideoList = () => {
         getSavedVideosByUser(parseInt(localStorage.getItem("tv_user")))
     }, [])
 
-    savedUserVideos.sort((a,b) => {
+    savedUserVideos.sort((a, b) => {
         return b.timestamp - a.timestamp
     })
 
@@ -39,7 +38,7 @@ export const SavedVideoList = () => {
                     timestamp: Date.now()
                 })
             }).then(() => {
-                setVideo({url: ""})
+                setVideo({ url: "" })
                 getSavedVideosByUser(parseInt(localStorage.getItem("tv_user")))
             })
     }
@@ -47,6 +46,15 @@ export const SavedVideoList = () => {
     return (
         <>
             <h1>Saved Videos</h1>
+
+            <div className="video-details">
+                <div className="video-embed">
+                    <iframe id="ytplayer" type="text/html" width="720" height="405"
+                        src={`https://www.youtube.com/embed/?playlist=${savedUserVideos.map(v => v.ytId).join()}&version=3`}
+                        frameborder="0" allowfullscreen></iframe>
+                </div>
+            </div>
+
 
             <div className="addInput">
                 <fieldset>
@@ -65,14 +73,12 @@ export const SavedVideoList = () => {
                         return (
                             <>
                                 <div className="savedVideo">
-                                    <Link to={`/savedvideos/detail/${v.id}`}>
                                         <h4>{v.title}</h4>
-                                    </Link>
                                     <button className="button" onClick={() => {
                                         deleteSavedVideo(v.id)
-                                        .then(() => {
-                                            getSavedVideosByUser(parseInt(localStorage.getItem("tv_user")))
-                                        })
+                                            .then(() => {
+                                                getSavedVideosByUser(parseInt(localStorage.getItem("tv_user")))
+                                            })
                                     }}>
                                         Remove
                                     </button>

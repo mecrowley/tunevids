@@ -7,7 +7,38 @@
       "email": "madeline@tunevids.com"
     }
   ],
-  "savedVideos": [],
+  "savedVideos": [
+    {
+      "userId": 1,
+      "title": "Unknown Mortal Orchestra - Boy Witch (FAN VIDEO)",
+      "ytId": "btwm9UMYq1k",
+      "ytChannelId": "UCal2BXtDTTHi9T4YDo4OoUg",
+      "channelName": "BradSee",
+      "duration": "PT2M25S",
+      "timestamp": 1623863876198,
+      "id": 2
+    },
+    {
+      "userId": 1,
+      "title": "Dinner - Siren Song (Official Video)",
+      "ytId": "2LLKB4V13o8",
+      "ytChannelId": "UC10Ot7i1OpwzlopW8Y6oQSQ",
+      "channelName": "CapturedTracks",
+      "duration": "PT3M33S",
+      "timestamp": 1623863932783,
+      "id": 4
+    },
+    {
+      "userId": 1,
+      "title": "Occhi dalle stelle (1978) Sherry Buchanan - Music by Marcello Giombini",
+      "ytId": "SqBNXx_0l6g",
+      "ytChannelId": "UCT2ftth8ztg3xbzPw_LVz3Q",
+      "channelName": "davidfromlille",
+      "duration": "PT1M29S",
+      "timestamp": 1623866304113,
+      "id": 5
+    }
+  ],
   "userChannels": [],
   "playlists": [],
   "playlistVideos": []
