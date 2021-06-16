@@ -1,0 +1,35 @@
+{
+  "users": [
+    {
+      "id": 1,
+      "firstName": "Madeline",
+      "lastName": "Crowley",
+      "email": "madeline@tunevids.com"
+    }
+  ],
+  "savedVideos": [
+    {
+      "userId": 1,
+      "title": "Tamaryn - Cranekiss [Official Video]",
+      "ytId": "XIO2tvOJSqc",
+      "ytChannelId": "UCTUBUMMJArUrVjUPrlUP7xA",
+      "channelName": "Mexican Summer",
+      "duration": "PT3M51S",
+      "timestamp": 1623791299986,
+      "id": 1
+    },
+    {
+      "userId": 1,
+      "title": "Blouse \"Time Travel\"",
+      "ytId": "PfF6wA-vgwE",
+      "ytChannelId": "UCrBAL6qdCFXeUvN1GshqAyw",
+      "channelName": "Lana Kim",
+      "duration": "PT3M41S",
+      "timestamp": 1623791730536,
+      "id": 2
+    }
+  ],
+  "userChannels": [],
+  "playlists": [],
+  "playlistVideos": []
+}

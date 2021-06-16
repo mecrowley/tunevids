@@ -1,0 +1,12 @@
+.navbar {
+    display: flex;
+    flex-wrap: wrap;
+    margin: 0;
+    justify-content: space-between;
+    color: white;
+    background-color: black;
+    transition: .5s ease;
+    padding: 1rem;
+    align-items: center;
+    list-style-type: none;
+}
