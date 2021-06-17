@@ -39,7 +39,15 @@
       "id": 5
     }
   ],
-  "userChannels": [],
+  "userChannels": [
+    {
+      "ytId": "UCT2ftth8ztg3xbzPw_LVz3Q",
+      "userId": 1,
+      "title": "davidfromlille",
+      "timestamp": 1623875085623,
+      "id": 1
+    }
+  ],
   "playlists": [],
   "playlistVideos": []
 }

@@ -1,0 +1,28 @@
+.input-field {
+    margin: 0.5rem;
+    width: 17rem;
+  }
+  
+  .addInput {
+    display: flex;
+    justify-content: space-around;
+    margin: 0 auto;
+  }
+  
+  .savedChannels {
+    display: flex;
+    flex-direction: column;
+  }
+  
+  .savedChannel {
+    display: flex;
+    margin: 0 auto;
+    padding: 0;
+  }
+  
+  .button {
+      height: 1.5rem;
+      margin-left: 1rem;
+      position: relative;
+      bottom: -0.8rem;
+  }
