@@ -37,8 +37,8 @@ export const Login = props => {
             </dialog>
 
             <section>
-                <h1 className="kkRewards">Tune Vids</h1>
-                <h2 className="signIn">Please sign in</h2>
+                <h1>Tune Vids</h1>
+                <h2>Please sign in</h2>
                 <form className="form--login" onSubmit={handleLogin}>
                     <fieldset className="login__fieldset">
                         <label htmlFor="inputEmail"> Email address </label>

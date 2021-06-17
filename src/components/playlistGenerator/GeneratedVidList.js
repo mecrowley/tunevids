@@ -6,13 +6,13 @@ import { YoutubeDataContext } from "../YoutubeDataProvider"
 
 export const AutoselectVidList = () => {
     const { getUserById } = useContext(UserContext)
-    const [ user, setUser ] = useState({})
-    const { getYoutubeChannelById } = useContext(YoutubeDataContext)
+    const [user, setUser] = useState({})
+    const { getYoutubeChannelById, getPlaylistVideosById } = useContext(YoutubeDataContext)
     const { getUserChannelsByUser, userChannels } = useContext(UserChannelContext)
     const { getSavedVideosByUser, savedUserVideos } = useContext(SavedVideoContext)
 
     useEffect(() => {
-            getUserById(parseInt(localStorage.getItem("tv_user")))
+        getUserById(parseInt(localStorage.getItem("tv_user")))
             .then((user) => {
                 setUser(user)
                 getUserChannelsByUser(user.id)
@@ -21,10 +21,30 @@ export const AutoselectVidList = () => {
     }, [])
 
     const PlaylistGenerator = () => {
-        
-        getYoutubeChannelById("UCT2ftth8ztg3xbzPw_LVz3Q")
-        .then((response) => {console.log(response)})
+        const allChannelVideos = {}
+
+        userChannels.forEach(c => {
+            getYoutubeChannelById(c.ytId)
+                .then(channel => {
+                    getPlaylistVideosById(channel.items[0].contentDetails.relatedPlaylists.uploads)
+                        .then(channelVideos => {
+                            allChannelVideos[channel.items[0].id] = channelVideos.items
+                            if (channelVideos.nextPageToken) {
+                                return fetch(`https://youtube.googleapis.com/youtube/v3/playlistItems?part=snippet&maxResults=100&pageToken=${channelVideos.nextPageToken}&playlistId=${channel.items[0].contentDetails.relatedPlaylists.uploads}&key=AIzaSyDAAdOiTTvYC1S1bsk1hgCYOtcMtK5ViLg`)
+                                .then(res => res.json())
+                                .then(nextPage => {
+                                    nextPage.items.forEach(v => {
+                                        allChannelVideos[channel.items[0].id].push(v)
+                                    })
+                                })
+                            }
+
+                        })
+                })
+        })
+        console.log(allChannelVideos)
     }
+
 
     return (
         <>

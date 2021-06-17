@@ -5,7 +5,7 @@
   
   .addInput {
     display: flex;
-    justify-content: space-around;
+    flex-direction: column;
     margin: 0 auto;
   }
   

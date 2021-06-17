@@ -14,11 +14,20 @@ export const YoutubeDataProvider = (props) => {
         .then(res => res.json())
     }
 
-    
+    const getYoutubeChannelByUserName = username => {
+        return fetch(`https://youtube.googleapis.com/youtube/v3/channels?part=snippet%2C%20contentDetails%2C%20statistics&forUsername=${username}&key=AIzaSyDAAdOiTTvYC1S1bsk1hgCYOtcMtK5ViLg`)
+        .then(res => res.json())
+    }
 
+    const getPlaylistVideosById = id => {
+        return fetch(`https://youtube.googleapis.com/youtube/v3/playlistItems?part=snippet&maxResults=100&playlistId=${id}&key=AIzaSyDAAdOiTTvYC1S1bsk1hgCYOtcMtK5ViLg`)
+        .then(res => res.json())
+    }
+
+    
     return (
         <YoutubeDataContext.Provider value={{
-            getYoutubeVideoById, getYoutubeChannelById
+            getYoutubeVideoById, getYoutubeChannelById, getYoutubeChannelByUserName, getPlaylistVideosById
         }}>
             {props.children}
         </YoutubeDataContext.Provider>

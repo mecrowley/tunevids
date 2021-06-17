@@ -5,7 +5,7 @@ import './UserChannel.css'
 
 export const UserChannelList = () => {
     const { getUserChannelsByUser, userChannels, addUserChannel, deleteUserChannel } = useContext(UserChannelContext)
-    const { getYoutubeChannelById } = useContext(YoutubeDataContext)
+    const { getYoutubeChannelById, getYoutubeChannelByUserName } = useContext(YoutubeDataContext)
     const [channel, setChannel] = useState({})
 
     useEffect(() => {
@@ -22,10 +22,25 @@ export const UserChannelList = () => {
         setChannel(newChannel)
     }
 
-    const handleAddUserChannel = () => {
-        const channelURL = channel.url
-        const [, ytChannelId] = channelURL.split("channel/")
-        getYoutubeChannelById(ytChannelId)
+    const handleAddChannelById = () => {
+            getYoutubeChannelById(channel.id)
+                .then((response) => {
+                    console.log(response.items[0])
+                    addUserChannel({
+                        ytId: response.items[0].id,
+                        userId: parseInt(localStorage.getItem("tv_user")),
+                        title: response.items[0].snippet.title,
+                        timestamp: Date.now()
+                    })
+                })
+                .then(() => {
+                    setChannel({ id: "" })
+                    getUserChannelsByUser(parseInt(localStorage.getItem("tv_user")))
+                })
+        }
+    
+    const handleAddChannelByUser = () => {
+        getYoutubeChannelByUserName(channel.userName)
         .then((response) => {
             console.log(response.items[0])
             addUserChannel({
@@ -36,10 +51,11 @@ export const UserChannelList = () => {
             })
         })
         .then(() => {
-            setChannel({url: ""})
+            setChannel({ id: "" })
             getUserChannelsByUser(parseInt(localStorage.getItem("tv_user")))
         })
     }
+
 
     return (
         <>
@@ -48,9 +64,16 @@ export const UserChannelList = () => {
 
             <div className="addInput">
                 <fieldset>
-                    <label htmlFor="url">Add Channel:</label>
-                    <input type="text" id="url" className="input-field" required autoFocus placeholder="Channel url" value={channel.url} onChange={handleControlledInputChange} />
-                    <button className="addButton" onClick={handleAddUserChannel}>
+                    <label htmlFor="url">Add Channel by Id:</label>
+                    <input type="text" id="id" className="input-field" required autoFocus placeholder="Channel Id" value={channel.id} onChange={handleControlledInputChange} />
+                    <button className="addButton" onClick={handleAddChannelById}>
+                        Submit
+            </button>
+                </fieldset>
+                <fieldset>
+                    <label htmlFor="url">Add Channel by User Name:</label>
+                    <input type="text" id="userName" className="input-field" required autoFocus placeholder="User Name" value={channel.userName} onChange={handleControlledInputChange} />
+                    <button className="addButton" onClick={handleAddChannelByUser}>
                         Submit
             </button>
                 </fieldset>
@@ -62,7 +85,7 @@ export const UserChannelList = () => {
                         return (
                             <>
                                 <div className="savedChannel">
-                                        <h4>{c.title}</h4>
+                                    <h4>{c.title}</h4>
                                     <button className="button" onClick={() => {
                                         deleteUserChannel(c.id)
                                             .then(() => {
