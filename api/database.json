@@ -41,60 +41,60 @@
   ],
   "userChannels": [
     {
-      "ytId": "UCT2ftth8ztg3xbzPw_LVz3Q",
-      "userId": 1,
-      "title": "davidfromlille",
-      "timestamp": 1623875085623,
-      "id": 1
-    },
-    {
-      "ytId": "UCDE5Ezmxq1bNVak4lmkpCMw",
-      "userId": 1,
-      "title": "Epitaph Records",
-      "timestamp": 1623960591913,
-      "id": 2
-    },
-    {
-      "ytId": "UCxDw7lo0niULDPAoX1hGB2Q",
-      "userId": 1,
-      "title": "MonsieurLunatique",
-      "timestamp": 1623960701022,
-      "id": 3
-    },
-    {
-      "ytId": "UCoRpYZaQsSHA9oFgzcaGviQ",
-      "userId": 1,
-      "title": "PlasticPassions",
-      "timestamp": 1623960732415,
-      "id": 4
-    },
-    {
-      "ytId": "UCV4mMA9St1rYc4ANbve-KBA",
-      "userId": 1,
-      "title": "Roxy Music",
-      "timestamp": 1623960874317,
-      "id": 5
-    },
-    {
-      "ytId": "UCRWI8eE1DRUH9fjoWlk2dtQ",
-      "userId": 1,
-      "title": "Good Music",
-      "timestamp": 1623961368328,
-      "id": 7
-    },
-    {
-      "ytId": "UCCCS8cRSiJjAqgwvmP7VxJw",
-      "userId": 1,
-      "title": "Vapor Memory",
-      "timestamp": 1623961870477,
-      "id": 8
-    },
-    {
-      "ytId": "UCB9vZ3lm2lOWBs-lSHTaRkQ",
       "userId": 1,
       "title": "Cosmic Drop",
-      "timestamp": 1623964365076,
+      "ytId": "UCB9vZ3lm2lOWBs-lSHTaRkQ",
+      "uploadsId": "UUB9vZ3lm2lOWBs-lSHTaRkQ",
+      "timestamp": 1624280315801,
       "id": 9
+    },
+    {
+      "userId": 1,
+      "title": "Vapor Memory",
+      "ytId": "UCCCS8cRSiJjAqgwvmP7VxJw",
+      "uploadsId": "UUCCS8cRSiJjAqgwvmP7VxJw",
+      "timestamp": 1624280335275,
+      "id": 10
+    },
+    {
+      "userId": 1,
+      "title": "Roxy Music",
+      "ytId": "UCV4mMA9St1rYc4ANbve-KBA",
+      "uploadsId": "UUV4mMA9St1rYc4ANbve-KBA",
+      "timestamp": 1624280349125,
+      "id": 11
+    },
+    {
+      "userId": 1,
+      "title": "PlasticPassions",
+      "ytId": "UCoRpYZaQsSHA9oFgzcaGviQ",
+      "uploadsId": "UUoRpYZaQsSHA9oFgzcaGviQ",
+      "timestamp": 1624280385518,
+      "id": 12
+    },
+    {
+      "userId": 1,
+      "title": "Epitaph Records",
+      "ytId": "UCDE5Ezmxq1bNVak4lmkpCMw",
+      "uploadsId": "UUDE5Ezmxq1bNVak4lmkpCMw",
+      "timestamp": 1624280448270,
+      "id": 13
+    },
+    {
+      "userId": 1,
+      "title": "MonsieurLunatique",
+      "ytId": "UCxDw7lo0niULDPAoX1hGB2Q",
+      "uploadsId": "UUxDw7lo0niULDPAoX1hGB2Q",
+      "timestamp": 1624280477003,
+      "id": 14
+    },
+    {
+      "userId": 1,
+      "title": "davidfromlille",
+      "ytId": "UCT2ftth8ztg3xbzPw_LVz3Q",
+      "uploadsId": "UUT2ftth8ztg3xbzPw_LVz3Q",
+      "timestamp": 1624280493559,
+      "id": 15
     }
   ],
   "playlists": [],

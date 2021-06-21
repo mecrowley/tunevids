@@ -7,9 +7,11 @@ import { YoutubeDataContext } from "../YoutubeDataProvider"
 export const AutoselectVidList = () => {
     const { getUserById } = useContext(UserContext)
     const [user, setUser] = useState({})
-    const { getYoutubeChannelById, getPlaylistVideosById } = useContext(YoutubeDataContext)
+    const { getYoutubeChannelById, getPlaylistVideosById, getPage2PlaylistVideos } = useContext(YoutubeDataContext)
     const { getUserChannelsByUser, userChannels } = useContext(UserChannelContext)
     const { getSavedVideosByUser, savedUserVideos } = useContext(SavedVideoContext)
+    const [fetchChannelVideos, setFetchChannelVideos] = useState(false)
+    const [allChannelVideos, setAllChannelVideos] = useState({})
 
     useEffect(() => {
         getUserById(parseInt(localStorage.getItem("tv_user")))
@@ -20,29 +22,82 @@ export const AutoselectVidList = () => {
             })
     }, [])
 
-    const PlaylistGenerator = () => {
-        const allChannelVideos = {}
-
-        userChannels.forEach(c => {
-            getYoutubeChannelById(c.ytId)
-                .then(channel => {
-                    getPlaylistVideosById(channel.items[0].contentDetails.relatedPlaylists.uploads)
-                        .then(channelVideos => {
-                            allChannelVideos[channel.items[0].id] = channelVideos.items
-                            if (channelVideos.nextPageToken) {
-                                return fetch(`https://youtube.googleapis.com/youtube/v3/playlistItems?part=snippet&maxResults=100&pageToken=${channelVideos.nextPageToken}&playlistId=${channel.items[0].contentDetails.relatedPlaylists.uploads}&key=AIzaSyDAAdOiTTvYC1S1bsk1hgCYOtcMtK5ViLg`)
-                                .then(res => res.json())
+    useEffect(() => {
+        if (fetchChannelVideos === false) {
+            return
+        } else {
+            let allFetchedVideos = {}
+            userChannels.forEach(c => {
+                getPlaylistVideosById(c.uploadsId)
+                    .then(channelVideos => {
+                        allFetchedVideos[c.id] = channelVideos.items
+                        if (channelVideos.nextPageToken) {
+                            getPage2PlaylistVideos(c.uploadsId)
                                 .then(nextPage => {
                                     nextPage.items.forEach(v => {
-                                        allChannelVideos[channel.items[0].id].push(v)
+                                        allFetchedVideos[c.id].push(v)
                                     })
                                 })
-                            }
+                        }
+                    })
+            })
+            console.log(allFetchedVideos)
+            setAllChannelVideos(allFetchedVideos)
+            setFetchChannelVideos(false)
+        }
+    }, [fetchChannelVideos])
 
-                        })
-                })
-        })
+
+    const PlaylistGenerator = () => {
         console.log(allChannelVideos)
+
+        const getRandomInt = max => {
+            return Math.floor(Math.random() * max);
+        }
+
+        const allChannelVideosArray = Object.entries(allChannelVideos)
+
+        const newPlaylistVideos = allChannelVideosArray.map(cv => {
+            return cv[1][getRandomInt(cv[1].length)]
+        })
+
+        if (newPlaylistVideos.length === 25) {
+            console.log(newPlaylistVideos)
+
+        } else if (newPlaylistVideos.length < 25) {
+            for (const [key, value] of Object.entries(allChannelVideos)) {
+                newPlaylistVideos.push(value[getRandomInt(value.length)])
+            }
+            let numberOfVideosToDelete = newPlaylistVideos.length - 25
+            if (numberOfVideosToDelete > 0) {
+                for (let i = 1; i <= numberOfVideosToDelete; i++) {
+                    newPlaylistVideos.splice(getRandomInt(newPlaylistVideos.length), 1)
+                }
+            }
+            console.log(newPlaylistVideos)
+
+        } else {
+            let numberOfVideosToDelete = newPlaylistVideos.length - 25
+            for (let i = 1; i <= numberOfVideosToDelete; i++) {
+                newPlaylistVideos.splice(getRandomInt(newPlaylistVideos.length), 1)
+                console.log(newPlaylistVideos)
+
+            }
+        }
+
+        return (
+            <>
+                <div className="newPlaylist">
+                    {newPlaylistVideos.map(v => {
+                        return (
+                            <div className="newVideo">
+                                {v.snippet.title}
+                            </div>
+                        )
+                    })}
+                </div>
+            </>
+        )
     }
 
 
@@ -50,7 +105,11 @@ export const AutoselectVidList = () => {
         <>
             <h2>Hello, {user.firstName}</h2>
 
-            <button onClick={PlaylistGenerator}>Generate Playlist</button>
+            {PlaylistGenerator()}
+
+            <button onClick={() => {
+                setFetchChannelVideos(true)
+            }}>Generate Playlist</button>
         </>
     )
 }

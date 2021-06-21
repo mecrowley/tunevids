@@ -27,9 +27,10 @@ export const UserChannelList = () => {
                 .then((response) => {
                     console.log(response.items[0])
                     addUserChannel({
-                        ytId: response.items[0].id,
                         userId: parseInt(localStorage.getItem("tv_user")),
                         title: response.items[0].snippet.title,
+                        ytId: response.items[0].id,
+                        uploadsId: response.items[0].contentDetails.relatedPlaylists.uploads,
                         timestamp: Date.now()
                     })
                 })
@@ -44,9 +45,10 @@ export const UserChannelList = () => {
         .then((response) => {
             console.log(response.items[0])
             addUserChannel({
-                ytId: response.items[0].id,
                 userId: parseInt(localStorage.getItem("tv_user")),
                 title: response.items[0].snippet.title,
+                ytId: response.items[0].id,
+                uploadsId: response.items[0].contentDetails.relatedPlaylists.uploads,
                 timestamp: Date.now()
             })
         })
