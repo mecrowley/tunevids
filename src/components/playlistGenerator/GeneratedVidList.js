@@ -11,7 +11,7 @@ export const AutoselectVidList = () => {
     const { getUserChannelsByUser, userChannels } = useContext(UserChannelContext)
     const { getSavedVideosByUser, savedUserVideos } = useContext(SavedVideoContext)
     const [fetchChannelVideos, setFetchChannelVideos] = useState(false)
-    const [allChannelVideos, setAllChannelVideos] = useState({})
+    const [allChannelVideos, setAllChannelVideos] = useState([])
 
     useEffect(() => {
         getUserById(parseInt(localStorage.getItem("tv_user")))
@@ -26,55 +26,42 @@ export const AutoselectVidList = () => {
         if (fetchChannelVideos === false) {
             return
         } else {
-            let allFetchedVideos = {}
-            userChannels.forEach(c => {
-                getPlaylistVideosById(c.uploadsId)
-                    .then(channelVideos => {
-                        allFetchedVideos[c.id] = channelVideos.items
-                        if (channelVideos.nextPageToken) {
-                            getPage2PlaylistVideos(c.uploadsId)
-                                .then(nextPage => {
-                                    nextPage.items.forEach(v => {
-                                        allFetchedVideos[c.id].push(v)
-                                    })
-                                })
-                        }
-                    })
+            const videoPromises = userChannels.map(c => {
+                return getPlaylistVideosById(c.uploadsId)
             })
-            console.log(allFetchedVideos)
-            setAllChannelVideos(allFetchedVideos)
+            Promise.all(videoPromises)
+                .then(videos => {
+                    setAllChannelVideos(videos)
+                })
             setFetchChannelVideos(false)
         }
     }, [fetchChannelVideos])
 
 
     const PlaylistGenerator = () => {
-        console.log(allChannelVideos)
 
         const getRandomInt = max => {
             return Math.floor(Math.random() * max);
         }
 
-        const allChannelVideosArray = Object.entries(allChannelVideos)
-
-        const newPlaylistVideos = allChannelVideosArray.map(cv => {
-            return cv[1][getRandomInt(cv[1].length)]
+        const newPlaylistVideos = allChannelVideos.map(videosObj => {
+            return videosObj.items[getRandomInt(videosObj.items.length)]
         })
 
         if (newPlaylistVideos.length === 25) {
             console.log(newPlaylistVideos)
 
         } else if (newPlaylistVideos.length < 25) {
-            for (const [key, value] of Object.entries(allChannelVideos)) {
-                newPlaylistVideos.push(value[getRandomInt(value.length)])
-            }
+            allChannelVideos.forEach(videosObj => {
+                newPlaylistVideos.push(videosObj.items[getRandomInt(videosObj.items.length)])
+            })
             let numberOfVideosToDelete = newPlaylistVideos.length - 25
+            
             if (numberOfVideosToDelete > 0) {
                 for (let i = 1; i <= numberOfVideosToDelete; i++) {
                     newPlaylistVideos.splice(getRandomInt(newPlaylistVideos.length), 1)
                 }
             }
-            console.log(newPlaylistVideos)
 
         } else {
             let numberOfVideosToDelete = newPlaylistVideos.length - 25
