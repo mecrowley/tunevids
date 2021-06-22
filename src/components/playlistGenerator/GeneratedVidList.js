@@ -7,11 +7,12 @@ import { YoutubeDataContext } from "../YoutubeDataProvider"
 export const AutoselectVidList = () => {
     const { getUserById } = useContext(UserContext)
     const [user, setUser] = useState({})
-    const { getPlaylistVideosById, getPage2PlaylistVideos } = useContext(YoutubeDataContext)
-    const { getUserChannelsByUser, userChannels } = useContext(UserChannelContext)
     const { getSavedVideosByUser, savedUserVideos } = useContext(SavedVideoContext)
+    const { getUserChannelsByUser, userChannels } = useContext(UserChannelContext)
     const [fetchChannelVideos, setFetchChannelVideos] = useState(false)
-    const [allChannelVideos, setAllChannelVideos] = useState([])
+    const { getPlaylistVideosById, getPage2PlaylistVideos } = useContext(YoutubeDataContext)
+    const [page1ChannelVideos, setPage1ChannelVideos] = useState([])
+    const [page2ChannelVideos, setPage2ChannelVideos] = useState([])
 
     useEffect(() => {
         getUserById(parseInt(localStorage.getItem("tv_user")))
@@ -31,26 +32,34 @@ export const AutoselectVidList = () => {
             })
             Promise.all(videoPromises)
                 .then(videos => {
-                    setAllChannelVideos(videos)
+                    setPage1ChannelVideos(videos)
                 })
             setFetchChannelVideos(false)
         }
     }, [fetchChannelVideos])
 
-    let counter = 1
-    
-    allChannelVideos.forEach(channelObj=> {
-        channelObj.items.forEach(videoObj => {
-            videoObj.counterId = counter
-            counter = counter + 1
-        })
-    })
-    
+    useEffect(() => {
+        if (page1ChannelVideos.length === 0) {
+            return
+        } else {
+            const channelsToGetPage2 = page1ChannelVideos.filter(o => o.nextPageToken)
+            const videoPromises = channelsToGetPage2.map(channelObj => {
+                return getPage2PlaylistVideos(channelObj.items[0].snippet.playlistId, channelObj.nextPageToken)
+            })
+            Promise.all(videoPromises)
+                .then(videos => {
+                    setPage2ChannelVideos(videos)
+                })
+        }
+    }, [page1ChannelVideos])
+
     const getRandomInt = max => {
         return Math.floor(Math.random() * max);
     }
 
-    const playlistVideos = allChannelVideos.map(videosObj => {
+    console.log(page2ChannelVideos)
+
+    const playlistVideos = page1ChannelVideos.map(videosObj => {
         return videosObj.items[getRandomInt(videosObj.items.length)]
     })
 
@@ -61,23 +70,18 @@ export const AutoselectVidList = () => {
         const savedVideosToAdd = []
         let numberOfVideosToAdd = null
 
-        if (savedUserVideos.length < 5) {
+        if (savedUserVideos.length < 10) {
             savedUserVideos.forEach(v => {
                 savedVideosToAdd.push(v)
             })
             numberOfVideosToAdd = 50 - savedUserVideos.length
 
-        } else if (savedUserVideos.length >= 5) {
-            for (let i = 0; i < 5; i++) {
-                savedVideosToAdd.push(savedUserVideos[getRandomInt(savedUserVideos.length)])
+        } else if (savedUserVideos.length >= 10) {
+            const randomSavedVideos = []
+            for (let i = 0; i < 10; i++) {
+                randomSavedVideos.push(savedUserVideos[getRandomInt(savedUserVideos.length)])
             }
-            savedVideosToAdd.sort((a, b) => { return a.id - b.id })
-            savedVideosToAdd.forEach(v => {
-                const lastVid = [...savedVideosToAdd].pop()
-                if (v.id === lastVid.id) {
-                    savedVideosToAdd.splice(playlistVideos.indexOf(v), 1)
-                }
-            })
+            savedVideosToAdd = [...new Set(randomSavedVideos)]
             numberOfVideosToAdd = 50 - savedVideosToAdd.length
         }
 
@@ -85,9 +89,15 @@ export const AutoselectVidList = () => {
 
             while (playlistVideos.length < numberOfVideosToAdd) {
 
-                allChannelVideos.forEach(videosObj => {
+                page2ChannelVideos.forEach(videosObj => {
                     playlistVideos.push(videosObj.items[getRandomInt(videosObj.items.length)])
                 })
+
+                if (playlistVideos.length < numberOfVideosToAdd) {
+                    page1ChannelVideos.forEach(videosObj => {
+                        playlistVideos.push(videosObj.items[getRandomInt(videosObj.items.length)])
+                    })
+                }
 
                 filteredPlaylistVideos = [...new Set(playlistVideos)]
 
@@ -108,7 +118,7 @@ export const AutoselectVidList = () => {
                     playlistVideos.splice(getRandomInt(playlistVideos.length), 1)
                 }
             } else if (numberOfVideosToDelete < 0) {
-                allChannelVideos.forEach(videosObj => {
+                page2ChannelVideos.forEach(videosObj => {
                     playlistVideos.push(videosObj.items[getRandomInt(videosObj.items.length)])
                 })
 
