@@ -53,7 +53,7 @@ export const UserChannelList = () => {
             })
         })
         .then(() => {
-            setChannel({ id: "" })
+            setChannel({ userName: "" })
             getUserChannelsByUser(parseInt(localStorage.getItem("tv_user")))
         })
     }

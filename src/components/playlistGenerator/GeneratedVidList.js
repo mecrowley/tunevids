@@ -7,7 +7,7 @@ import { YoutubeDataContext } from "../YoutubeDataProvider"
 export const AutoselectVidList = () => {
     const { getUserById } = useContext(UserContext)
     const [user, setUser] = useState({})
-    const { getYoutubeChannelById, getPlaylistVideosById, getPage2PlaylistVideos } = useContext(YoutubeDataContext)
+    const { getPlaylistVideosById, getPage2PlaylistVideos } = useContext(YoutubeDataContext)
     const { getUserChannelsByUser, userChannels } = useContext(UserChannelContext)
     const { getSavedVideosByUser, savedUserVideos } = useContext(SavedVideoContext)
     const [fetchChannelVideos, setFetchChannelVideos] = useState(false)
@@ -37,54 +37,93 @@ export const AutoselectVidList = () => {
         }
     }, [fetchChannelVideos])
 
+    let counter = 1
+    
+    allChannelVideos.forEach(channelObj=> {
+        channelObj.items.forEach(videoObj => {
+            videoObj.counterId = counter
+            counter = counter + 1
+        })
+    })
+    
+    const getRandomInt = max => {
+        return Math.floor(Math.random() * max);
+    }
 
-    const PlaylistGenerator = () => {
+    const playlistVideos = allChannelVideos.map(videosObj => {
+        return videosObj.items[getRandomInt(videosObj.items.length)]
+    })
 
-        const getRandomInt = max => {
-            return Math.floor(Math.random() * max);
+    let filteredPlaylistVideos = []
+
+    if (playlistVideos.length > 0) {
+
+        const savedVideosToAdd = []
+        let numberOfVideosToAdd = null
+
+        if (savedUserVideos.length < 5) {
+            savedUserVideos.forEach(v => {
+                savedVideosToAdd.push(v)
+            })
+            numberOfVideosToAdd = 50 - savedUserVideos.length
+
+        } else if (savedUserVideos.length >= 5) {
+            for (let i = 0; i < 5; i++) {
+                savedVideosToAdd.push(savedUserVideos[getRandomInt(savedUserVideos.length)])
+            }
+            savedVideosToAdd.sort((a, b) => { return a.id - b.id })
+            savedVideosToAdd.forEach(v => {
+                const lastVid = [...savedVideosToAdd].pop()
+                if (v.id === lastVid.id) {
+                    savedVideosToAdd.splice(playlistVideos.indexOf(v), 1)
+                }
+            })
+            numberOfVideosToAdd = 50 - savedVideosToAdd.length
         }
 
-        const newPlaylistVideos = allChannelVideos.map(videosObj => {
-            return videosObj.items[getRandomInt(videosObj.items.length)]
-        })
+        if (playlistVideos.length < numberOfVideosToAdd) {
 
-        if (newPlaylistVideos.length === 25) {
-            console.log(newPlaylistVideos)
+            while (playlistVideos.length < numberOfVideosToAdd) {
 
-        } else if (newPlaylistVideos.length < 25) {
-            allChannelVideos.forEach(videosObj => {
-                newPlaylistVideos.push(videosObj.items[getRandomInt(videosObj.items.length)])
-            })
-            let numberOfVideosToDelete = newPlaylistVideos.length - 25
-            
-            if (numberOfVideosToDelete > 0) {
-                for (let i = 1; i <= numberOfVideosToDelete; i++) {
-                    newPlaylistVideos.splice(getRandomInt(newPlaylistVideos.length), 1)
+                allChannelVideos.forEach(videosObj => {
+                    playlistVideos.push(videosObj.items[getRandomInt(videosObj.items.length)])
+                })
+
+                filteredPlaylistVideos = [...new Set(playlistVideos)]
+
+                let numberOfVideosToDelete = filteredPlaylistVideos.length - numberOfVideosToAdd
+                if (numberOfVideosToDelete > 0) {
+                    for (let i = 1; i <= numberOfVideosToDelete; i++) {
+                        playlistVideos.splice(getRandomInt(playlistVideos.length), 1)
+                    }
                 }
             }
 
-        } else {
-            let numberOfVideosToDelete = newPlaylistVideos.length - 25
-            for (let i = 1; i <= numberOfVideosToDelete; i++) {
-                newPlaylistVideos.splice(getRandomInt(newPlaylistVideos.length), 1)
-                console.log(newPlaylistVideos)
+        } else if (playlistVideos.length > numberOfVideosToAdd) {
+            filteredPlaylistVideos = [...new Set(playlistVideos)]
 
+            let numberOfVideosToDelete = filteredPlaylistVideos.length - numberOfVideosToAdd
+            if (numberOfVideosToDelete > 0) {
+                for (let i = 1; i <= numberOfVideosToDelete; i++) {
+                    playlistVideos.splice(getRandomInt(playlistVideos.length), 1)
+                }
+            } else if (numberOfVideosToDelete < 0) {
+                allChannelVideos.forEach(videosObj => {
+                    playlistVideos.push(videosObj.items[getRandomInt(videosObj.items.length)])
+                })
+
+                filteredPlaylistVideos = [...new Set(playlistVideos)]
+
+                let numberOfVideosToDelete = filteredPlaylistVideos.length - numberOfVideosToAdd
+                for (let i = 1; i <= numberOfVideosToDelete; i++) {
+                    playlistVideos.splice(getRandomInt(playlistVideos.length), 1)
+                }
             }
         }
-
-        return (
-            <>
-                <div className="newPlaylist">
-                    {newPlaylistVideos.map(v => {
-                        return (
-                            <div className="newVideo">
-                                {v.snippet.title}
-                            </div>
-                        )
-                    })}
-                </div>
-            </>
-        )
+        savedVideosToAdd.forEach(v => {
+            filteredPlaylistVideos.splice(getRandomInt(45), 0, v)
+        })
+        console.log(filteredPlaylistVideos)
     }
 
 
@@ -92,7 +131,15 @@ export const AutoselectVidList = () => {
         <>
             <h2>Hello, {user.firstName}</h2>
 
-            {PlaylistGenerator()}
+            <div className="newPlaylist">
+                {filteredPlaylistVideos.map(v => {
+                    return (
+                        <div className="newVideo">
+                            { v.hasOwnProperty("snippet") ? v.snippet.title : v.title}
+                        </div>
+                    )
+                })}
+            </div>
 
             <button onClick={() => {
                 setFetchChannelVideos(true)
