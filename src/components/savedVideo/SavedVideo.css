@@ -1,3 +1,12 @@
+.flex-container {
+    display: flex;
+}
+
+.center {
+    display: block;
+    margin: 1rem auto;
+}
+
 .input-field {
   margin: 0.5rem;
   width: 17rem;
@@ -9,17 +18,6 @@
   margin: 0 auto;
 }
 
-.savedVideos {
-  display: flex;
-  flex-direction: column;
-}
-
-.savedVideo {
-  display: flex;
-  margin: 0 auto;
-  padding: 0;
-}
-
 .button {
     height: 1.5rem;
     margin-left: 1rem;
@@ -27,12 +25,7 @@
     bottom: -0.8rem;
 }
 
-.video-details {
-    display: flex;
-    display: column;
-}
-
-.video-embed {
-    display: block;
-    margin: 0 auto;
+.video {
+    border-bottom: solid black 1px;
+    padding: 0.3rem;
 }

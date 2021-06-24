@@ -15,7 +15,10 @@ export const NavBar = () => {
                 <Link className="navbar__link" to="/savedchannels">Saved Channels</Link>
             </li>
             <li className="navbar__item">
-                <Link className="navbar__link"
+                <Link className="navbar__link" to="/playlists">Playlists</Link>
+            </li>
+            <li className="navbar__item">
+                <Link className="navbar__link" to="/"
                 onClick={
                     (event) => {
                         localStorage.removeItem("tv_user")

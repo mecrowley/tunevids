@@ -1,6 +1,10 @@
 import React from "react"
 import { Route } from "react-router-dom"
-import { AutoselectVidList } from "./playlistGenerator/GeneratedVidList";
+import { PlaylistList } from "./playlist/PlaylistList";
+import { PlaylistDetail } from "./playlist/PlaylistDetail";
+import { PlaylistProvider } from "./playlist/PlaylistProvider";
+import { PlaylistVideoProvider } from "./playlist/PlaylistVideoProvider";
+import { PlaylistGenerator } from "./playlistGenerator/PlaylistGenerator";
 import { SavedVideoList } from "./savedVideo/SavedVideoList"
 import { SavedVideoProvider } from "./savedVideo/SavedVideoProvider"
 import { UserProvider } from "./user/UserProvider";
@@ -16,22 +20,30 @@ export const ApplicationViews = () => {
             <UserProvider>
                 <SavedVideoProvider>
                     <UserChannelProvider>
-                        <YoutubeDataProvider>
-                            <Route exact path="/">
-                                <AutoselectVidList />
-                            </Route>
-                        </YoutubeDataProvider>
+                        <PlaylistProvider>
+                            <PlaylistVideoProvider>
+                                <YoutubeDataProvider>
+                                    <Route exact path="/">
+                                        <PlaylistGenerator />
+                                    </Route>
+                                </YoutubeDataProvider>
+                            </PlaylistVideoProvider>
+                        </PlaylistProvider>
                     </UserChannelProvider>
                 </SavedVideoProvider>
             </UserProvider>
 
-            <SavedVideoProvider>
-                <YoutubeDataProvider>
-                    <Route exact path="/savedvideos">
-                        <SavedVideoList />
-                    </Route>
-                </YoutubeDataProvider>
-            </SavedVideoProvider>
+            <PlaylistProvider>
+                <PlaylistVideoProvider>
+                    <SavedVideoProvider>
+                        <YoutubeDataProvider>
+                            <Route exact path="/savedvideos">
+                                <SavedVideoList />
+                            </Route>
+                        </YoutubeDataProvider>
+                    </SavedVideoProvider>
+                </PlaylistVideoProvider>
+            </PlaylistProvider>
 
             <UserChannelProvider>
                 <YoutubeDataProvider>
@@ -40,6 +52,19 @@ export const ApplicationViews = () => {
                     </Route>
                 </YoutubeDataProvider>
             </UserChannelProvider>
+
+            <PlaylistProvider>
+                <PlaylistVideoProvider>
+                    <YoutubeDataProvider>
+                        <Route exact path="/playlists">
+                            <PlaylistList />
+                        </Route>
+                        <Route exact path="/playlists/detail/:playlistId(\d+)">
+                            <PlaylistDetail />
+                        </Route>
+                    </YoutubeDataProvider>
+                </PlaylistVideoProvider>
+            </PlaylistProvider>
         </>
     )
 }

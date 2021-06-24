@@ -1,3 +1,16 @@
+.flex-container {
+    display: flex;
+}
+
+.center {
+    display: block;
+    margin: 1rem auto;
+}
+
+.column {
+    flex-direction: column;
+}
+
 .input-field {
     margin: 0.5rem;
     width: 17rem;
@@ -9,15 +22,16 @@
     margin: 0 auto;
   }
   
-  .savedChannels {
-    display: flex;
-    flex-direction: column;
+  .channels {  
+    flex-wrap: wrap;
+    justify-content: space-evenly;
+    position: relative;
+    left: 4rem;
   }
   
-  .savedChannel {
-    display: flex;
-    margin: 0 auto;
-    padding: 0;
+  .channel {
+    flex-basis: 30%;
+    margin: 1rem 0 0 0;
   }
   
   .button {

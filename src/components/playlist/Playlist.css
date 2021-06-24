@@ -1,0 +1,20 @@
+.flex-container {
+    display: flex;
+}
+
+.center {
+    display: block;
+    margin: 1rem auto;
+}
+
+.playlists {  
+    flex-wrap: wrap;
+    justify-content: space-evenly;
+    position: relative;
+    left: 4rem;
+  }
+  
+  .playlist {
+    flex-basis: 30%;
+    margin: 1rem 0 0 0;
+  }

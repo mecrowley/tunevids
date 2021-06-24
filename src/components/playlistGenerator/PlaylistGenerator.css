@@ -1,0 +1,23 @@
+.flex-container {
+    display: flex;
+}
+
+.center {
+    display: block;
+    margin: 1rem auto;
+}
+
+.video-list {
+    display: flex;
+    flex-direction: column;
+    /* margin: 1rem; */
+}
+
+.title {
+    flex: 2;
+}
+
+.video {
+    border-bottom: solid black 1px;
+    padding: 0.3rem;
+}

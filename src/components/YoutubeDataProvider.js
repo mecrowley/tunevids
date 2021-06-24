@@ -1,4 +1,4 @@
-import React, { useState, createContext } from "react"
+import React, { createContext, useState } from "react"
 
 export const YoutubeDataContext = createContext()
 
@@ -19,12 +19,12 @@ export const YoutubeDataProvider = (props) => {
             .then(res => res.json())
     }
 
-    const getPlaylistVideosById = id => {
-        return fetch(`https://youtube.googleapis.com/youtube/v3/playlistItems?part=snippet&maxResults=50&playlistId=${id}&key=AIzaSyDAAdOiTTvYC1S1bsk1hgCYOtcMtK5ViLg`)
-            .then(res => res.json())
+    const getYtVideosByChannelId = id => {
+            return fetch(`https://youtube.googleapis.com/youtube/v3/playlistItems?part=snippet&maxResults=50&playlistId=${id}&key=AIzaSyDAAdOiTTvYC1S1bsk1hgCYOtcMtK5ViLg`)
+                .then(res => res.json())
     }
 
-    const getPage2PlaylistVideos = (id, pageToken) => {
+    const getPage2ChannelVideos = (id, pageToken) => {
         return fetch(`https://youtube.googleapis.com/youtube/v3/playlistItems?part=snippet&maxResults=50&pageToken=${pageToken}&playlistId=${id}&key=AIzaSyDAAdOiTTvYC1S1bsk1hgCYOtcMtK5ViLg`)
             .then(res => res.json())
     }
@@ -32,7 +32,7 @@ export const YoutubeDataProvider = (props) => {
 
     return (
         <YoutubeDataContext.Provider value={{
-            getYoutubeVideoById, getYoutubeChannelById, getYoutubeChannelByUserName, getPlaylistVideosById, getPage2PlaylistVideos
+            getYoutubeVideoById, getYoutubeChannelById, getYoutubeChannelByUserName, getYtVideosByChannelId, getPage2ChannelVideos
         }}>
             {props.children}
         </YoutubeDataContext.Provider>

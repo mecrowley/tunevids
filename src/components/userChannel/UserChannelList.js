@@ -23,39 +23,39 @@ export const UserChannelList = () => {
     }
 
     const handleAddChannelById = () => {
-            getYoutubeChannelById(channel.id)
-                .then((response) => {
-                    console.log(response.items[0])
-                    addUserChannel({
-                        userId: parseInt(localStorage.getItem("tv_user")),
-                        title: response.items[0].snippet.title,
-                        ytId: response.items[0].id,
-                        uploadsId: response.items[0].contentDetails.relatedPlaylists.uploads,
-                        timestamp: Date.now()
-                    })
+        getYoutubeChannelById(channel.id)
+            .then((response) => {
+                console.log(response.items[0])
+                addUserChannel({
+                    userId: parseInt(localStorage.getItem("tv_user")),
+                    title: response.items[0].snippet.title,
+                    ytId: response.items[0].id,
+                    uploadsId: response.items[0].contentDetails.relatedPlaylists.uploads,
+                    timestamp: Date.now()
                 })
-                .then(() => {
-                    setChannel({ id: "" })
-                    getUserChannelsByUser(parseInt(localStorage.getItem("tv_user")))
-                })
-        }
-    
+            })
+            .then(() => {
+                setChannel({ id: "" })
+                getUserChannelsByUser(parseInt(localStorage.getItem("tv_user")))
+            })
+    }
+
     const handleAddChannelByUser = () => {
         getYoutubeChannelByUserName(channel.userName)
-        .then((response) => {
-            console.log(response.items[0])
-            addUserChannel({
-                userId: parseInt(localStorage.getItem("tv_user")),
-                title: response.items[0].snippet.title,
-                ytId: response.items[0].id,
-                uploadsId: response.items[0].contentDetails.relatedPlaylists.uploads,
-                timestamp: Date.now()
+            .then((response) => {
+                console.log(response.items[0])
+                addUserChannel({
+                    userId: parseInt(localStorage.getItem("tv_user")),
+                    title: response.items[0].snippet.title,
+                    ytId: response.items[0].id,
+                    uploadsId: response.items[0].contentDetails.relatedPlaylists.uploads,
+                    timestamp: Date.now()
+                })
             })
-        })
-        .then(() => {
-            setChannel({ userName: "" })
-            getUserChannelsByUser(parseInt(localStorage.getItem("tv_user")))
-        })
+            .then(() => {
+                setChannel({ userName: "" })
+                getUserChannelsByUser(parseInt(localStorage.getItem("tv_user")))
+            })
     }
 
 
@@ -63,7 +63,6 @@ export const UserChannelList = () => {
         <>
 
             <h1>Saved Channels</h1>
-
             <div className="addInput">
                 <fieldset>
                     <label htmlFor="url">Add Channel by Id:</label>
@@ -81,12 +80,12 @@ export const UserChannelList = () => {
                 </fieldset>
             </div>
 
-            <div className="savedChannels">
+            <div className="channels flex-container">
                 {
                     userChannels.map(c => {
                         return (
                             <>
-                                <div className="savedChannel">
+                                <div className="channel">
                                     <h4>{c.title}</h4>
                                     <button className="button" onClick={() => {
                                         deleteUserChannel(c.id)

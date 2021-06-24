@@ -37,6 +37,36 @@
       "duration": "PT1M29S",
       "timestamp": 1623866304113,
       "id": 5
+    },
+    {
+      "userId": 1,
+      "title": "Dean Blunt - ZaZa (Music Video)",
+      "ytId": "xMHwkiWmHAw",
+      "ytChannelId": "UClI5m0ecLXDfBF34E5xDebw",
+      "channelName": "kingcon2k11",
+      "duration": "PT2M10S",
+      "timestamp": 1624336409012,
+      "id": 7
+    },
+    {
+      "userId": 1,
+      "title": "Geneva Jacuzzi - Do I Sad? (Official Video)",
+      "ytId": "HbVrciYKXp0",
+      "ytChannelId": "UCwgbIRYugF77jt65m2CtYYg",
+      "channelName": "Geneva Jacuzzi",
+      "duration": "PT2M37S",
+      "timestamp": 1624337146566,
+      "id": 8
+    },
+    {
+      "userId": 1,
+      "title": "Imiafan-Someone Else (makina girgir remix)",
+      "ytId": "sV3XHCnkUv0",
+      "ytChannelId": "UC6AA_TUlwog-6pNarpOfh_A",
+      "channelName": "Iminvisibleman",
+      "duration": "PT4M19S",
+      "timestamp": 1624372509071,
+      "id": 9
     }
   ],
   "userChannels": [
@@ -95,8 +125,369 @@
       "uploadsId": "UUT2ftth8ztg3xbzPw_LVz3Q",
       "timestamp": 1624280493559,
       "id": 15
+    },
+    {
+      "userId": 1,
+      "title": "fastestfashion",
+      "ytId": "UCrj4Bpl1M0TNPyQ30vflyWA",
+      "uploadsId": "UUrj4Bpl1M0TNPyQ30vflyWA",
+      "timestamp": 1624336781569,
+      "id": 16
+    },
+    {
+      "userId": 1,
+      "title": "Strange Desire",
+      "ytId": "UCtxpjen0rZfK9GadDfWCroA",
+      "uploadsId": "UUtxpjen0rZfK9GadDfWCroA",
+      "timestamp": 1624336898167,
+      "id": 17
+    },
+    {
+      "userId": 1,
+      "title": "DRAB MAJESTY",
+      "ytId": "UChhHBvPJXK4ATYGVTfaU43A",
+      "uploadsId": "UUhhHBvPJXK4ATYGVTfaU43A",
+      "timestamp": 1624337003855,
+      "id": 18
+    },
+    {
+      "userId": 1,
+      "title": "Myri Bat'Hory",
+      "ytId": "UC6BcpX6L_wt87FjnXkI4dIg",
+      "uploadsId": "UU6BcpX6L_wt87FjnXkI4dIg",
+      "timestamp": 1624337278809,
+      "id": 20
+    },
+    {
+      "userId": 1,
+      "title": "Jorge Elbrecht",
+      "ytId": "UCNYNp3t8DgLk5Ti58Mns8Fw",
+      "uploadsId": "UUNYNp3t8DgLk5Ti58Mns8Fw",
+      "timestamp": 1624337492532,
+      "id": 21
     }
   ],
-  "playlists": [],
-  "playlistVideos": []
+  "playlists": [
+    {
+      "id": 1,
+      "userId": 1,
+      "name": "genList",
+      "timestamp": 1624372509071
+    },
+    {
+      "userId": 1,
+      "name": "Whatever",
+      "timestamp": 1624516987641,
+      "id": 2
+    },
+    {
+      "userId": 1,
+      "name": "New Stuff",
+      "timestamp": 1624519799939,
+      "id": 3
+    }
+  ],
+  "playlistVideos": [
+    {
+      "id": 1,
+      "playlistId": 1,
+      "userId": 1,
+      "title": "",
+      "ytId": ""
+    },
+    {
+      "id": 2,
+      "playlistId": 1,
+      "userId": 1,
+      "title": "Dinner - Siren Song (Official Video)",
+      "ytId": "2LLKB4V13o8"
+    },
+    {
+      "id": 3,
+      "playlistId": 1,
+      "userId": 1,
+      "title": "Winter of the World : Fluvial Lake",
+      "ytId": "CGskNmvzOAM"
+    },
+    {
+      "id": 4,
+      "playlistId": 1,
+      "userId": 1,
+      "title": "Roxy Music - Angel Eyes (1979)",
+      "ytId": "V9w85VtlG9c"
+    },
+    {
+      "id": 5,
+      "playlistId": 1,
+      "userId": 1,
+      "title": "Sleep Forever - Eastern Lightning (Official video)",
+      "ytId": "WZ7QAS_hfME"
+    },
+    {
+      "id": 6,
+      "playlistId": 1,
+      "userId": 1,
+      "title": "Danny Elfman - \"In Time\"",
+      "ytId": "dl7mc6GaE2g"
+    },
+    {
+      "id": 7,
+      "playlistId": 1,
+      "userId": 1,
+      "title": "Unknown Mortal Orchestra - Boy Witch (FAN VIDEO)",
+      "ytId": "btwm9UMYq1k"
+    },
+    {
+      "id": 8,
+      "playlistId": 1,
+      "userId": 1,
+      "title": "Imiafan-Someone Else (makina girgir remix)",
+      "ytId": "sV3XHCnkUv0"
+    },
+    {
+      "id": 9,
+      "playlistId": 1,
+      "userId": 1,
+      "title": "Ton Steine Scherben - Einheitsfrontlied",
+      "ytId": "-8yHd9lNl8E"
+    },
+    {
+      "id": 10,
+      "playlistId": 1,
+      "userId": 1,
+      "title": "HOBGOBLINS (1988) - \"Kiss Kicker 99\" by The Fontanelles",
+      "ytId": "T99gtOb2maY"
+    },
+    {
+      "id": 11,
+      "playlistId": 1,
+      "userId": 1,
+      "title": "Réseau D'Ombres - Mirrors (1985)",
+      "ytId": "Q_xoPIUT36A"
+    },
+    {
+      "id": 12,
+      "playlistId": 1,
+      "userId": 1,
+      "title": "Tinsel Heart - American Friend",
+      "ytId": "C-ZWhUmmeUY"
+    },
+    {
+      "id": 13,
+      "playlistId": 1,
+      "userId": 1,
+      "title": "Drab Majesty performing LIVE on the Del Talk Show",
+      "ytId": "3iZ6lw5hdx0"
+    },
+    {
+      "id": 14,
+      "playlistId": 1,
+      "userId": 1,
+      "title": "Delta Komplex   Empty Souls",
+      "ytId": "20Uskg7fHQw"
+    },
+    {
+      "id": 15,
+      "playlistId": 1,
+      "userId": 1,
+      "title": "Jorge Elbrecht / Presentable Corpse - \"Run & Hide\" [Live Performance Video]",
+      "ytId": "MM4-sWOYmZw"
+    },
+    {
+      "id": 16,
+      "playlistId": 1,
+      "userId": 1,
+      "title": "Mndsgn - Just Air (Music Video)",
+      "ytId": "EnQJ8L3pAm4"
+    },
+    {
+      "id": 17,
+      "playlistId": 1,
+      "userId": 1,
+      "title": "NYSE : MILLENIALISM",
+      "ytId": "JJHcxthI4Wo"
+    },
+    {
+      "id": 18,
+      "playlistId": 1,
+      "userId": 1,
+      "title": "Princess Century - Rendezvous",
+      "ytId": "AXy3hFzeS44"
+    },
+    {
+      "id": 19,
+      "playlistId": 1,
+      "userId": 1,
+      "title": "Justin Courtney Pierre - \"Illumination\" (Full Album Stream)",
+      "ytId": "fxttSQI9-CU"
+    },
+    {
+      "id": 20,
+      "playlistId": 1,
+      "userId": 1,
+      "title": "Solitairen Effekten - Astronautenmädchen",
+      "ytId": "yWUa4JuZ8dg"
+    },
+    {
+      "id": 21,
+      "playlistId": 1,
+      "userId": 1,
+      "title": "Dean Blunt - ZaZa (Music Video)",
+      "ytId": "xMHwkiWmHAw"
+    },
+    {
+      "id": 22,
+      "playlistId": 1,
+      "userId": 1,
+      "title": "Vampyros Lesbos (1971) HD Re-edit - Music by Manfred Hubler & Siegfred Schwab",
+      "ytId": "Q1nJ2IzqJEg"
+    },
+    {
+      "id": 23,
+      "playlistId": 1,
+      "userId": 1,
+      "title": "",
+      "ytId": ""
+    },
+    {
+      "id": 24,
+      "playlistId": 1,
+      "userId": 1,
+      "title": "Elegance of the Damned : Tchu W Promiennym Świetle (Breathless In Your Radiant Light)",
+      "ytId": "uAkJicDY6pY"
+    },
+    {
+      "id": 25,
+      "playlistId": 1,
+      "userId": 1,
+      "title": "Roxy Music - Virginia Plain (1972)",
+      "ytId": "-gJIH6cOMPs"
+    },
+    {
+      "id": 26,
+      "playlistId": 1,
+      "userId": 1,
+      "title": "Sundata - Riding the Waves",
+      "ytId": "Dc_Ka6a8F_w"
+    },
+    {
+      "id": 27,
+      "playlistId": 1,
+      "userId": 1,
+      "title": "plxntkid - \"hospital bed\" (Full Album Stream)",
+      "ytId": "Uw_TiCNnRYY"
+    },
+    {
+      "id": 28,
+      "playlistId": 1,
+      "userId": 1,
+      "title": "Ciaran Harte - Love Is Strange",
+      "ytId": "sWIX039dXsc"
+    },
+    {
+      "id": 29,
+      "playlistId": 1,
+      "userId": 1,
+      "title": "Intelligence Dept. - Gravity (1986)",
+      "ytId": "wwtlBTStAE4"
+    },
+    {
+      "id": 30,
+      "playlistId": 1,
+      "userId": 1,
+      "title": "DRAB MAJESTY - \"Pole Position\"",
+      "ytId": "lFWTwwTqSaI"
+    },
+    {
+      "id": 31,
+      "playlistId": 1,
+      "userId": 1,
+      "title": "Autumns - Female Model",
+      "ytId": "odn2WodEHWc"
+    },
+    {
+      "id": 32,
+      "playlistId": 1,
+      "userId": 1,
+      "title": "Jorge Elbrecht / Presentable Corpse - \"The Springtime Brigade\" [Production Deconstruction Mix]",
+      "ytId": "3qDo1l3PvTc"
+    },
+    {
+      "id": 33,
+      "playlistId": 1,
+      "userId": 1,
+      "title": "Diakova - k Poline/nasovsem",
+      "ytId": "MyYEP4F1tCw"
+    },
+    {
+      "id": 34,
+      "playlistId": 1,
+      "userId": 1,
+      "title": "DAS M - LEIDENSCHAFT UND PRODUKTION",
+      "ytId": "Shf8o_yE6Og"
+    },
+    {
+      "id": 35,
+      "playlistId": 1,
+      "userId": 1,
+      "title": "Geneva Jacuzzi - Do I Sad? (Official Video)",
+      "ytId": "HbVrciYKXp0"
+    },
+    {
+      "id": 36,
+      "playlistId": 1,
+      "userId": 1,
+      "title": "Occhi dalle stelle (1978) Sherry Buchanan - Music by Marcello Giombini",
+      "ytId": "SqBNXx_0l6g"
+    },
+    {
+      "id": 37,
+      "playlistId": 1,
+      "userId": 1,
+      "title": "Deadlier Than the Male (1967) - song by The Walker Brothers",
+      "ytId": "vnoYXUVYxZg"
+    },
+    {
+      "id": 38,
+      "playlistId": 1,
+      "userId": 1,
+      "title": "",
+      "ytId": ""
+    },
+    {
+      "id": 39,
+      "playlistId": 1,
+      "userId": 1,
+      "title": "Silent Em - Eterno",
+      "ytId": "e0kvCuki0ks"
+    },
+    {
+      "id": 40,
+      "playlistId": 1,
+      "userId": 1,
+      "title": "Popsimonova & Zarkoff -  Because Of You",
+      "ytId": "UnfQtjfgskw"
+    },
+    {
+      "playlistId": 2,
+      "userId": 1,
+      "title": "Imiafan-Someone Else (makina girgir remix)",
+      "ytId": "sV3XHCnkUv0",
+      "id": 41
+    },
+    {
+      "playlistId": 3,
+      "userId": 1,
+      "title": "Dean Blunt - ZaZa (Music Video)",
+      "ytId": "xMHwkiWmHAw",
+      "id": 42
+    },
+    {
+      "playlistId": 2,
+      "userId": 1,
+      "title": "Coral Cross - Covered In Scabs",
+      "ytId": "t-B2wHBP8MY",
+      "id": 43
+    }
+  ]
 }
