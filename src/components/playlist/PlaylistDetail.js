@@ -3,6 +3,7 @@ import { useParams } from "react-router";
 import { YoutubeDataContext } from "../YoutubeDataProvider";
 import { PlaylistContext } from "./PlaylistProvider";
 import { PlaylistVideoContext } from "./PlaylistVideoProvider";
+import "./Playlist.css"
 
 export const PlaylistDetail = () => {
     const { getPlaylistById, playlist } = useContext(PlaylistContext)

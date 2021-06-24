@@ -111,28 +111,58 @@ export const GeneratePlaylist = ({ savedVideos, playlistVideos, userChannels, pl
                 filteredPlaylistVideos.splice(getRandomInt(45), 0, v)
             })
 
-            const genPlaylistId = playlistVideos[0].playlistId
-            const playlistVideoIds = playlistVideos.map(pv => pv.id)
-            let counter = playlistVideoIds[0] - 2
+            //all videos for the playlist are now stored in filteredPlaylistVideos
 
+            //finding the playlistId of the user's generated playlist from the playlistVideos (which contains all the videos in
+            //the user's last generated playlist)
+            const genPlaylistId = playlistVideos[0].playlistId
+            
+            //creating an array of all the ids of the videos in the user's generated playlist (they are always the same,
+            // neither created nor deleted, only edited to contain video data or not)
+            const playlistVideoIds = playlistVideos.map(pv => pv.id)
+
+            //creating a counter that starts with one value lower than the first index number of the lowest (aka first) id in the
+            //playlistVideoIds array 
+            let counter = -1
+
+            //creating new playlistVideo objects by mapping through all of the new videos in filteredPlaylistVideos
             const newVideos = filteredPlaylistVideos.map(v => {
                 counter += 1
                 return {
                     id: playlistVideoIds[counter],
+                    //the id value above starts with the lowest id value in the playlistVideoIds array which is at the
+                    //index value of 0 currently stored in the counter variable
+                    //every time the map goes to the next video the counter is increased by 1, therefore simultaneously
+                    //iterating through all of the playlistVideoIds indexes, capturing their id value and assigning it a
+                    //the corresponging new video that will replace it
                     playlistId: genPlaylistId,
                     userId: parseInt(localStorage.getItem("tv_user")),
+                    //some of the videos are from the user's saved videos, and therefore they have different keys than the
+                    //videos fetched from youtube
+                    //the following ternary statements account for which key to access depending on where the video is from
+                    //the youtube videos have a "snippet" key that I check for first
+                    //if the video has it, then I access that value for the title, if it doesn't, than I only use the title key
+                    //that the saved user videos have.  Same for the youtube video id value
                     title: (v.hasOwnProperty("snippet") ? v.snippet.title : v.title),
                     ytId: (v.hasOwnProperty("snippet") ? v.snippet.resourceId.videoId : v.ytId)
                 }
             })
 
+            //Mapping through the converted newVideos array and adding them to the user's generated playlist by using the
+            //PUT fetch method to replace the video data there with the new video data and capturing all the returned promises
+            //in the videopromises array
             const videopromises = newVideos.map(v => addToGenPlaylist(v))
+            //Passing the array of promises through Promise.all so my .then() functions won't start until all the promises
+            //have resolved (aka, all the videos have finished posting)
             Promise.all(videopromises)
+            //reset the page2ChannelVideos because the component no longer needs them and it signals to the function not to
+            //run again
                 .then(() => setPage2ChannelVideos([]))
                 .then(() => getPlaylistVideosByPlaylistId(genPlaylistId))
             console.log(newVideos)
         }
-    }, [page2ChannelVideos])
+    }, [page2ChannelVideos])//the function to generate a new playlist is signalled to begin when the state of page2ChannelVideos changes
+                            //specifically, when page2ChannelVideos holds videos
 
     return (
         <>

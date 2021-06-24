@@ -65,61 +65,61 @@ export const SavedVideoList = () => {
                         src={`https://www.youtube.com/embed/?playlist=${savedUserVideos.map(v => v.ytId).join()}&version=3`}
                         frameborder="0" allowfullscreen></iframe>
 
-            <div className="addInput">
-                <fieldset>
-                    <label htmlFor="url">Add Video:</label>
-                    <input type="text" id="url" className="input-field" required autoFocus placeholder="Video url" value={video.url} onChange={handleControlledInputChange} />
-                    <button className="addButton" onClick={handleAddVideo}>
-                        Submit
+                    <div className="addInput">
+                        <fieldset>
+                            <label htmlFor="url">Add Video:</label>
+                            <input type="text" id="url" className="input-field" required autoFocus placeholder="Video url" value={video.url} onChange={handleControlledInputChange} />
+                            <button className="addButton" onClick={handleAddVideo}>
+                                Submit
             </button>
-                </fieldset>
-            </div>
+                        </fieldset>
+                    </div>
 
 
-            <div className="video-list">
-                {
-                    savedUserVideos.map(v => {
-                        return (
-                            <>
-                                <div className="video flex-container">
-                                    <div className="title">
-                                    {v.title}
-                                    </div>
-                                    <div className="dropdown">
-                                        <select name="playlistId" id="playlistId" className="dropdown" value={video.playlistId}
-                                            onChange={(event) => {
-                                                addPlaylistVideo({
-                                                    playlistId: parseInt(event.target.value),
-                                                    userId: parseInt(localStorage.getItem("tv_user")),
-                                                    title: v.title,
-                                                    ytId: v.ytId
-                                                })
+                    <div className="video-list">
+                        {
+                            savedUserVideos.map(v => {
+                                return (
+                                    <>
+                                        <div className="video flex-container">
+                                            <div className="title">
+                                                {v.title}
+                                            </div>
+                                            <div className="dropdown">
+                                                <select name="playlistId" id="playlistId" className="dropdown" value={video.playlistId}
+                                                    onChange={(event) => {
+                                                        addPlaylistVideo({
+                                                            playlistId: parseInt(event.target.value),
+                                                            userId: parseInt(localStorage.getItem("tv_user")),
+                                                            title: v.title,
+                                                            ytId: v.ytId
+                                                        })
+                                                    }}>
+                                                    <option value="0">Add to playlist</option>
+                                                    {
+                                                        playlists.map(p => (
+                                                            <option key={p.id} value={p.id}>
+                                                                {p.name}
+                                                            </option>
+                                                        ))
+                                                    }
+                                                </select>
+                                            </div>
+                                            <button className="remove-button" onClick={() => {
+                                                deleteSavedVideo(v.id)
+                                                    .then(() => {
+                                                        getSavedVideosByUser(parseInt(localStorage.getItem("tv_user")))
+                                                    })
                                             }}>
-                                            <option value="0">Add to playlist</option>
-                                            {
-                                                playlists.map(p => (
-                                                    <option key={p.id} value={p.id}>
-                                                        {p.name}
-                                                    </option>
-                                                ))
-                                            }
-                                        </select>
-                                    </div>
-                                    <button className="remove-button" onClick={() => {
-                                        deleteSavedVideo(v.id)
-                                            .then(() => {
-                                                getSavedVideosByUser(parseInt(localStorage.getItem("tv_user")))
-                                            })
-                                    }}>
-                                        Remove
+                                                Remove
                                     </button>
-                                </div>
-                            </>
-                        )
-                    })
-                }
-            </div>
-            </div>
+                                        </div>
+                                    </>
+                                )
+                            })
+                        }
+                    </div>
+                </div>
             </div>
         </>
     )

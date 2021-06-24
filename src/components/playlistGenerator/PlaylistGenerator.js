@@ -35,24 +35,24 @@ export const PlaylistGenerator = () => {
         <>
             <h2>Hello, {user.firstName}</h2>
 
-            <div className="flex-container video-details">
-                <div className="center video-embed">
+            <div className="flex-container video-embed">
+                <div className="center video-details">
                     <iframe id="ytplayer" type="text/html" width="720" height="405"
                         src={`https://www.youtube.com/embed/?playlist=${playlistVideos.map(v => {
                             return v.ytId
                         }).join()}&version=3`}
                         frameborder="0" allowfullscreen></iframe>
 
-            <div className="video-list">
-                <GeneratePlaylist savedVideos={savedUserVideos} userChannels={userChannels} playlistVideos={playlistVideos} playlists={playlists}/>
-                </div>
-
-                        <button classname="playlistGenButton" onClick={event => {
-                            event.preventDefault()
-                            setInitialize(true)
-                        }}>Generate New Playlist</button>
+                    <div className="video-list">
+                        <GeneratePlaylist savedVideos={savedUserVideos} userChannels={userChannels} playlistVideos={playlistVideos} playlists={playlists} />
                     </div>
+
+                    <button classname="playlistGenButton" onClick={event => {
+                        event.preventDefault()
+                        setInitialize(true)
+                    }}>Generate New Playlist</button>
                 </div>
+            </div>
         </>
     )
 }
