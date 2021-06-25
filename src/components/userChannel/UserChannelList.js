@@ -31,6 +31,7 @@ export const UserChannelList = () => {
                     title: response.items[0].snippet.title,
                     ytId: response.items[0].id,
                     uploadsId: response.items[0].contentDetails.relatedPlaylists.uploads,
+                    thumbnail: response.items[0].snippet.thumbnails.default.url,
                     timestamp: Date.now()
                 })
             })
@@ -43,12 +44,12 @@ export const UserChannelList = () => {
     const handleAddChannelByUser = () => {
         getYoutubeChannelByUserName(channel.userName)
             .then((response) => {
-                console.log(response.items[0])
                 addUserChannel({
                     userId: parseInt(localStorage.getItem("tv_user")),
                     title: response.items[0].snippet.title,
                     ytId: response.items[0].id,
                     uploadsId: response.items[0].contentDetails.relatedPlaylists.uploads,
+                    thumbnail: response.items[0].snippet.thumbnails.default.url,
                     timestamp: Date.now()
                 })
             })
@@ -86,7 +87,13 @@ export const UserChannelList = () => {
                         return (
                             <>
                                 <div className="channel">
+                                    <div className="title">
                                     <h4>{c.title}</h4>
+                                    </div>
+                                    <div className="thumbnail">
+                                    <img className="thumbnail" src={`${c.thumbnail}`} />
+                                    </div>
+                                    <div>
                                     <button className="button" onClick={() => {
                                         deleteUserChannel(c.id)
                                             .then(() => {
@@ -95,6 +102,7 @@ export const UserChannelList = () => {
                                     }}>
                                         Remove
                                     </button>
+                                    </div>
                                 </div>
                             </>
                         )

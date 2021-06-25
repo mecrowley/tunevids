@@ -1,11 +1,15 @@
 import React, { useEffect, useState, useContext } from "react"
+import { SavedVideoContext } from "../savedVideo/SavedVideoProvider";
 import { PlaylistVideoContext } from "../playlist/PlaylistVideoProvider"
 import { YoutubeDataContext } from "../YoutubeDataProvider"
 import "./PlaylistGenerator.css"
+import FavoriteBorderIcon from '@material-ui/icons/FavoriteBorder';
+import FavoriteIcon from '@material-ui/icons/Favorite';
 
-export const GeneratePlaylist = ({ savedVideos, playlistVideos, userChannels, playlists }) => {
+export const GeneratePlaylist = ({ playlistVideos, userChannels, playlists }) => {
+    const { savedUserVideos, getSavedVideosByUser, addSavedVideo, deleteSavedVideo } = useContext(SavedVideoContext)
     const { addToGenPlaylist, getPlaylistVideosByPlaylistId, addPlaylistVideo, initialize, setInitialize } = useContext(PlaylistVideoContext)
-    const { getYtVideosByChannelId, getPage2ChannelVideos } = useContext(YoutubeDataContext)
+    const { getYtVideosByChannelId, getPage2ChannelVideos, getYoutubeVideoById } = useContext(YoutubeDataContext)
     const [page1ChannelVideos, setPage1ChannelVideos] = useState([])
     const [page2ChannelVideos, setPage2ChannelVideos] = useState([])
 
@@ -41,18 +45,18 @@ export const GeneratePlaylist = ({ savedVideos, playlistVideos, userChannels, pl
             let filteredPlaylistVideos = []
             let numberOfVideosToAdd = null
 
-            const savedVideosToAdd = []
+            let savedVideosToAdd = []
 
-            if (savedVideos.length < 10) {
-                savedVideos.forEach(v => {
+            if (savedUserVideos.length < 10) {
+                savedUserVideos.forEach(v => {
                     savedVideosToAdd.push(v)
                 })
-                numberOfVideosToAdd = 40 - savedVideos.length
+                numberOfVideosToAdd = 40 - savedUserVideos.length
 
-            } else if (savedVideos.length >= 10) {
+            } else if (savedUserVideos.length >= 10) {
                 const randomSavedVideos = []
                 for (let i = 0; i < 10; i++) {
-                    randomSavedVideos.push(savedVideos[getRandomInt(savedVideos.length)])
+                    randomSavedVideos.push(savedUserVideos[getRandomInt(savedUserVideos.length)])
                 }
                 savedVideosToAdd = [...new Set(randomSavedVideos)]
                 numberOfVideosToAdd = 40 - savedVideosToAdd.length
@@ -111,12 +115,12 @@ export const GeneratePlaylist = ({ savedVideos, playlistVideos, userChannels, pl
                 filteredPlaylistVideos.splice(getRandomInt(45), 0, v)
             })
 
-            //all videos for the playlist are now stored in filteredPlaylistVideos
+            //all videos for the new playlist are now stored in filteredPlaylistVideos
 
             //finding the playlistId of the user's generated playlist from the playlistVideos (which contains all the videos in
             //the user's last generated playlist)
             const genPlaylistId = playlistVideos[0].playlistId
-            
+
             //creating an array of all the ids of the videos in the user's generated playlist (they are always the same,
             // neither created nor deleted, only edited to contain video data or not)
             const playlistVideoIds = playlistVideos.map(pv => pv.id)
@@ -141,10 +145,11 @@ export const GeneratePlaylist = ({ savedVideos, playlistVideos, userChannels, pl
                     //videos fetched from youtube
                     //the following ternary statements account for which key to access depending on where the video is from
                     //the youtube videos have a "snippet" key that I check for first
-                    //if the video has it, then I access that value for the title, if it doesn't, than I only use the title key
+                    //if the video has it, then I access that value for the title, if it doesn't, then I only use the title key
                     //that the saved user videos have.  Same for the youtube video id value
                     title: (v.hasOwnProperty("snippet") ? v.snippet.title : v.title),
-                    ytId: (v.hasOwnProperty("snippet") ? v.snippet.resourceId.videoId : v.ytId)
+                    ytId: (v.hasOwnProperty("snippet") ? v.snippet.resourceId.videoId : v.ytId),
+                    thumbnail: (v.hasOwnProperty("snippet") ? v.snippet.thumbnails.default.url : v.thumbnail)
                 }
             })
 
@@ -155,32 +160,70 @@ export const GeneratePlaylist = ({ savedVideos, playlistVideos, userChannels, pl
             //Passing the array of promises through Promise.all so my .then() functions won't start until all the promises
             //have resolved (aka, all the videos have finished posting)
             Promise.all(videopromises)
-            //reset the page2ChannelVideos because the component no longer needs them and it signals to the function not to
-            //run again
+                //reset the page2ChannelVideos because the component no longer needs them and it signals to the function not to
+                //run again
                 .then(() => setPage2ChannelVideos([]))
                 .then(() => getPlaylistVideosByPlaylistId(genPlaylistId))
             console.log(newVideos)
         }
     }, [page2ChannelVideos])//the function to generate a new playlist is signalled to begin when the state of page2ChannelVideos changes
-                            //specifically, when page2ChannelVideos holds videos
+    //specifically, when page2ChannelVideos holds videos
+
+
+    const handleUnlike = () => {
+
+    }
 
     return (
         <>
             {playlistVideos.map(v => {
+                if (v.title === "") { return } else {
+
                     return (
                         <div className="video flex-container">
+                            <div className="icon">
+                                {savedUserVideos.find(sv => sv.title === v.title) ?
+                                    <FavoriteIcon onClick={e => {
+                                        e.preventDefault()
+                                        deleteSavedVideo(savedUserVideos.find(sv => sv.title === v.title).id)
+                                            .then(() => {
+                                                getSavedVideosByUser(parseInt(localStorage.getItem("tv_user")))
+                                            })
+                                    }} /> :
+                                    <FavoriteBorderIcon onClick={e => {
+                                        e.preventDefault()
+                                        getYoutubeVideoById(v.ytId)
+                                            .then(response => {
+                                                addSavedVideo({
+                                                    userId: parseInt(localStorage.getItem("tv_user")),
+                                                    title: response.items[0].snippet.title,
+                                                    ytId: v.ytId,
+                                                    ytChannelId: response.items[0].snippet.channelId,
+                                                    channelName: response.items[0].snippet.channelTitle,
+                                                    duration: response.items[0].contentDetails.duration,
+                                                    thumbnail: response.items[0].snippet.thumbnails.default.url,
+                                                    timestamp: Date.now()
+                                                })
+                                                    .then(() => {
+                                                        getSavedVideosByUser(parseInt(localStorage.getItem("tv_user")))
+                                                    })
+                                            })
+                                    }
+                                    } />}
+                            </div>
                             <div className="title">
                                 {v.title}
                             </div>
                             <div className="dropdown">
                                 <select name="playlistId" id="playlistId" className="dropdown"
                                     onChange={(event) => {
-                                        addPlaylistVideo({
-                                            playlistId: parseInt(event.target.value),
-                                            userId: parseInt(localStorage.getItem("tv_user")),
-                                            title: v.title,
-                                            ytId: v.ytId
-                                        })
+                                                addPlaylistVideo({
+                                                    playlistId: parseInt(event.target.value),
+                                                    userId: parseInt(localStorage.getItem("tv_user")),
+                                                    title: v.title,
+                                                    ytId: v.ytId,
+                                                    thumbnail: v.thumbnail
+                                                })
                                     }}>
                                     <option value="0">Add to playlist</option>
                                     {
@@ -210,6 +253,7 @@ export const GeneratePlaylist = ({ savedVideos, playlistVideos, userChannels, pl
                         </div>
                     )
                 }
+            }
             )}
         </>
     )

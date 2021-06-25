@@ -25,18 +25,23 @@
   .channels {  
     flex-wrap: wrap;
     justify-content: space-evenly;
-    position: relative;
-    left: 4rem;
+    /* position: relative;
+    left: 4rem; */
   }
   
   .channel {
     flex-basis: 30%;
     margin: 1rem 0 0 0;
+    text-align: center;
   }
   
   .button {
       height: 1.5rem;
-      margin-left: 1rem;
+      margin-left: 0;
       position: relative;
       bottom: -0.8rem;
+  }
+
+  .thumbnail {
+      border-radius: 100%;
   }

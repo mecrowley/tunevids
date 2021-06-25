@@ -1,9 +1,11 @@
 import React, { useContext, useEffect, useState } from "react"
 import { SavedVideoContext } from "./SavedVideoProvider"
 import { PlaylistContext } from "../playlist/PlaylistProvider";
+import { PlaylistVideoContext } from "../playlist/PlaylistVideoProvider";
 import { YoutubeDataContext } from "../YoutubeDataProvider";
 import "./SavedVideo.css"
-import { PlaylistVideoContext } from "../playlist/PlaylistVideoProvider";
+import FavoriteBorderIcon from '@material-ui/icons/FavoriteBorder';
+import FavoriteIcon from '@material-ui/icons/Favorite';
 
 export const SavedVideoList = () => {
     const { getSavedVideosByUser, savedUserVideos, addSavedVideo, deleteSavedVideo } = useContext(SavedVideoContext)
@@ -47,6 +49,7 @@ export const SavedVideoList = () => {
                     ytChannelId: response.items[0].snippet.channelId,
                     channelName: response.items[0].snippet.channelTitle,
                     duration: response.items[0].contentDetails.duration,
+                    thumbnail: response.items[0].snippet.thumbnails.default.url,
                     timestamp: Date.now()
                 })
             }).then(() => {
@@ -82,6 +85,36 @@ export const SavedVideoList = () => {
                                 return (
                                     <>
                                         <div className="video flex-container">
+                                        <div className="icon">
+                                {savedUserVideos.find(sv => sv.title === v.title) ?
+                                    <FavoriteIcon onClick={e => {
+                                        e.preventDefault()
+                                        deleteSavedVideo(savedUserVideos.find(sv => sv.title === v.title).id)
+                                        .then(() => {
+                                            getSavedVideosByUser(parseInt(localStorage.getItem("tv_user")))
+                                        })
+                                    }} /> :
+                                    <FavoriteBorderIcon onClick={e => {
+                                        e.preventDefault()
+                                        getYoutubeVideoById(v.ytId)
+                                            .then(response => {
+                                                addSavedVideo({
+                                                    userId: parseInt(localStorage.getItem("tv_user")),
+                                                    title: response.items[0].snippet.title,
+                                                    ytId: v.ytId,
+                                                    ytChannelId: response.items[0].snippet.channelId,
+                                                    channelName: response.items[0].snippet.channelTitle,
+                                                    duration: response.items[0].contentDetails.duration,
+                                                    thumbnail: response.items[0].snippet.thumbnails.default.url,
+                                                    timestamp: Date.now()
+                                                })
+                                                .then(() => {
+                                                    getSavedVideosByUser(parseInt(localStorage.getItem("tv_user")))
+                                                })
+                                            })
+                                    }
+                                    } />}
+                            </div>
                                             <div className="title">
                                                 {v.title}
                                             </div>
@@ -92,7 +125,8 @@ export const SavedVideoList = () => {
                                                             playlistId: parseInt(event.target.value),
                                                             userId: parseInt(localStorage.getItem("tv_user")),
                                                             title: v.title,
-                                                            ytId: v.ytId
+                                                            ytId: v.ytId,
+                                                            thumbnail: v.thumbnail
                                                         })
                                                     }}>
                                                     <option value="0">Add to playlist</option>
@@ -105,14 +139,6 @@ export const SavedVideoList = () => {
                                                     }
                                                 </select>
                                             </div>
-                                            <button className="remove-button" onClick={() => {
-                                                deleteSavedVideo(v.id)
-                                                    .then(() => {
-                                                        getSavedVideosByUser(parseInt(localStorage.getItem("tv_user")))
-                                                    })
-                                            }}>
-                                                Remove
-                                    </button>
                                         </div>
                                     </>
                                 )

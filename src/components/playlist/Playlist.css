@@ -10,11 +10,32 @@
 .playlists {  
     flex-wrap: wrap;
     justify-content: space-evenly;
-    position: relative;
-    left: 4rem;
+    text-align: center;
   }
-  
-  .playlist {
-    flex-basis: 30%;
-    margin: 1rem 0 0 0;
+
+  .video_thumbnail {
+      background-color: black;
+  }
+
+  .thumbnail_border {
+      border: solid black 1rem;
+      height: 90px;
+      width: 120px;
+      margin-bottom: 1rem;
+  }
+
+  .empty_playlist {
+      border: black;
+      width: 120px;
+  }
+
+  .playlist_title {
+      display: flex;
+      text-align: center;
+      /* justify-content: space-evenly; */
+  }
+
+  .create_icon {
+      position: relative;
+      bottom: -0.9rem;
   }

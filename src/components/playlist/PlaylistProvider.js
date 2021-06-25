@@ -24,6 +24,17 @@ export const PlaylistProvider = (props) => {
             },
             body: JSON.stringify(playlistObj)
         })
+        .then(res => res.json())
+    }
+
+    const editPlaylist = playlistObj => {
+        return fetch(`http://localhost:8088/playlists/${playlistObj.id}`, {
+            method: "PATCH",
+            headers: {
+                "Content-Type": "application/json"
+            },
+            body: JSON.stringify(playlistObj)
+        })
     }
 
     const deletePlaylist = playlistId => {
@@ -34,7 +45,7 @@ export const PlaylistProvider = (props) => {
 
     return (
         <PlaylistContext.Provider value={{
-            playlist, getPlaylistsByUser, getPlaylistById, addPlaylist, deletePlaylist
+            playlist, getPlaylistsByUser, getPlaylistById, addPlaylist, editPlaylist, deletePlaylist
         }}>
             {props.children}
         </PlaylistContext.Provider>

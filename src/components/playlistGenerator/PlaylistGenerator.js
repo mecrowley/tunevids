@@ -11,9 +11,10 @@ export const PlaylistGenerator = () => {
     const { user, getUserById } = useContext(UserContext)
     const { getSavedVideosByUser, savedUserVideos } = useContext(SavedVideoContext)
     const { getUserChannelsByUser, userChannels } = useContext(UserChannelContext)
-    const { getPlaylistsByUser } = useContext(PlaylistContext)
-    const { getPlaylistVideosByPlaylistId, playlistVideos, setInitialize } = useContext(PlaylistVideoContext)
+    const { getPlaylistsByUser, addPlaylist } = useContext(PlaylistContext)
+    const { getPlaylistVideosByPlaylistId, playlistVideos, addPlaylistVideo, setInitialize } = useContext(PlaylistVideoContext)
     const [playlists, setPlaylists] = useState([])
+    const [playlistSaved, setPlaylistSaved] = useState(false)
 
     useEffect(() => {
         getUserById(parseInt(localStorage.getItem("tv_user")))
@@ -44,13 +45,34 @@ export const PlaylistGenerator = () => {
                         frameborder="0" allowfullscreen></iframe>
 
                     <div className="video-list">
-                        <GeneratePlaylist savedVideos={savedUserVideos} userChannels={userChannels} playlistVideos={playlistVideos} playlists={playlists} />
+                        <GeneratePlaylist userChannels={userChannels} playlistVideos={playlistVideos} playlists={playlists} />
                     </div>
-
+                    <div className="buttons">
+                    <button onClick={e => {
+                        e.preventDefault()
+                        addPlaylist({
+                            userId: parseInt(localStorage.getItem("tv_user")),
+                            name: `Playlist ${new Date(Date.now()).toLocaleDateString('en-US')}`,
+                            timestamp: Date.now()
+                        }).then(response => {
+                            Promise.all(playlistVideos.map(pv => {
+                                if (pv.title === "") { return new Promise } else {
+                                    return addPlaylistVideo({
+                                        playlistId: response.id,
+                                        userId: parseInt(localStorage.getItem("tv_user")),
+                                        title: pv.title,
+                                        ytId: pv.ytId,
+                                        thumbnail: pv.thumbnail
+                                    })
+                                }
+                            })).then(() => setPlaylistSaved(true))
+                        })
+                    }}>{playlistSaved ? "Playlist Saved!" : "Save Playlist"}</button>
                     <button classname="playlistGenButton" onClick={event => {
                         event.preventDefault()
                         setInitialize(true)
                     }}>Generate New Playlist</button>
+                    </div>
                 </div>
             </div>
         </>

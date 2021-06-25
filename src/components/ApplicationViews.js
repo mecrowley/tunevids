@@ -53,18 +53,21 @@ export const ApplicationViews = () => {
                 </YoutubeDataProvider>
             </UserChannelProvider>
 
-            <PlaylistProvider>
-                <PlaylistVideoProvider>
-                    <YoutubeDataProvider>
-                        <Route exact path="/playlists">
-                            <PlaylistList />
-                        </Route>
-                        <Route exact path="/playlists/detail/:playlistId(\d+)">
-                            <PlaylistDetail />
-                        </Route>
-                    </YoutubeDataProvider>
-                </PlaylistVideoProvider>
-            </PlaylistProvider>
+            <SavedVideoProvider>
+                <PlaylistProvider>
+                    <PlaylistVideoProvider>
+                        <YoutubeDataProvider>
+                            <Route exact path="/playlists">
+                                <PlaylistList />
+                            </Route>
+                            <Route exact path="/playlists/detail/:playlistId(\d+)">
+                                <PlaylistDetail />
+                            </Route>
+                        </YoutubeDataProvider>
+                    </PlaylistVideoProvider>
+                </PlaylistProvider>
+            </SavedVideoProvider>
+
         </>
     )
 }

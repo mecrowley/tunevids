@@ -7,12 +7,6 @@
     margin: 1rem auto;
 }
 
-/* .video-list {
-    display: flex;
-    flex-direction: column;
-    margin: 1rem;
-} */
-
 .title {
     flex: 2;
 }
@@ -20,8 +14,19 @@
 .video {
     border-bottom: solid black 1px;
     padding: 0.3rem;
+    display: flex;
 }
 
 .video-embed {
     margin: 1rem 1rem;
+}
+
+.icon {
+    margin-right: 1rem;
+}
+
+.buttons {
+    display: flex;
+    margin-top: 1rem;
+    justify-content: space-around;
 }
