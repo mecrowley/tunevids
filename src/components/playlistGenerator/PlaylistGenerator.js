@@ -56,7 +56,7 @@ export const PlaylistGenerator = () => {
                             timestamp: Date.now()
                         }).then(response => {
                             Promise.all(playlistVideos.map(pv => {
-                                if (pv.title === "") { return new Promise } else {
+                                if (pv.title === "") { return } else {
                                     return addPlaylistVideo({
                                         playlistId: response.id,
                                         userId: parseInt(localStorage.getItem("tv_user")),

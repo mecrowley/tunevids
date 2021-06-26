@@ -252,39 +252,6 @@
     },
     {
       "userId": 1,
-      "title": "Tinsel Heart - Mona's Eyes",
-      "ytId": "hbZniRos_6U",
-      "ytChannelId": "UCoRpYZaQsSHA9oFgzcaGviQ",
-      "channelName": "PlasticPassions",
-      "duration": "PT3M13S",
-      "thumbnail": "https://i.ytimg.com/vi/hbZniRos_6U/default.jpg",
-      "timestamp": 1624631723605,
-      "id": 38
-    },
-    {
-      "userId": 1,
-      "title": "The Slits - Typical Girls",
-      "ytId": "ZyXGblps64M",
-      "ytChannelId": "UCYA1mzhntDQ5xXErt-UttIg",
-      "channelName": "Nemova",
-      "duration": "PT3M46S",
-      "thumbnail": "https://i.ytimg.com/vi/ZyXGblps64M/default.jpg",
-      "timestamp": 1624631798098,
-      "id": 39
-    },
-    {
-      "userId": 1,
-      "title": "The Microgram : Give It Some Time",
-      "ytId": "qcx7BzD3F8E",
-      "ytChannelId": "UCCCS8cRSiJjAqgwvmP7VxJw",
-      "channelName": "Vapor Memory",
-      "duration": "PT31M20S",
-      "thumbnail": "https://i.ytimg.com/vi/qcx7BzD3F8E/default.jpg",
-      "timestamp": 1624654218797,
-      "id": 40
-    },
-    {
-      "userId": 1,
       "title": "Geneva Jacuzzi - Casket (Album Version)",
       "ytId": "Dfwf26A18XU",
       "ytChannelId": "UC6BcpX6L_wt87FjnXkI4dIg",
@@ -296,25 +263,35 @@
     },
     {
       "userId": 1,
-      "title": "Slater- Port City (Full Mixtape)",
-      "ytId": "k9Pa-us2OLA",
-      "ytChannelId": "UCjHL0RCL16HQRqu2Irzk5eg",
-      "channelName": "Vada Vada",
-      "duration": "PT16M27S",
-      "thumbnail": "https://i.ytimg.com/vi/k9Pa-us2OLA/default.jpg",
-      "timestamp": 1624654323375,
-      "id": 42
+      "title": "Roxy Music - Avalon (1982)",
+      "ytId": "_Ra9w77mETg",
+      "ytChannelId": "UCV4mMA9St1rYc4ANbve-KBA",
+      "channelName": "Roxy Music",
+      "duration": "PT4M16S",
+      "timestamp": 1624656741843,
+      "id": 44
     },
     {
       "userId": 1,
-      "title": "Whispering Sons - Time",
-      "ytId": "iAk4yWUWbu8",
-      "ytChannelId": "UC6BcpX6L_wt87FjnXkI4dIg",
-      "channelName": "Myri Bat'Hory",
-      "duration": "PT5M43S",
-      "thumbnail": "https://i.ytimg.com/vi/iAk4yWUWbu8/default.jpg",
-      "timestamp": 1624654325053,
-      "id": 43
+      "title": "EYEDRESS - JEALOUS (OFFICIAL VIDEO)",
+      "ytId": "d0Jyvteqzrw",
+      "ytChannelId": "UCUey8i1E-v0610gRpbN2PJw",
+      "channelName": "EYEDRESS",
+      "duration": "PT2M3S",
+      "thumbnail": "https://i.ytimg.com/vi/d0Jyvteqzrw/default.jpg",
+      "timestamp": 1624660010134,
+      "id": 45
+    },
+    {
+      "userId": 1,
+      "title": "2021",
+      "ytId": "ljl3_p12tpo",
+      "ytChannelId": "UCHov3IkCnb-VwOWChR1eqVg",
+      "channelName": "A. G. Cook - Topic",
+      "duration": "PT1M57S",
+      "thumbnail": "https://i.ytimg.com/vi/ljl3_p12tpo/default.jpg",
+      "timestamp": 1624661007221,
+      "id": 46
     }
   ],
   "userChannels": [
@@ -515,6 +492,15 @@
       "thumbnail": "https://yt3.ggpht.com/ytc/AKedOLTeBkv2FdgfHtCF8WZ3mMHMnQDk1rjtEL1KqVkG2g=s88-c-k-c0x00ffffff-no-rj-mo",
       "timestamp": 1624604530222,
       "id": 44
+    },
+    {
+      "userId": 1,
+      "title": "EYEDRESS",
+      "ytId": "UCUey8i1E-v0610gRpbN2PJw",
+      "uploadsId": "UUUey8i1E-v0610gRpbN2PJw",
+      "thumbnail": "https://yt3.ggpht.com/E5B7m5dwEPNP6dQrJOR2XSQouNMrUMH6axCIF26g3xhckp70EuLrBKVX0I1YA2LBjFxTU1AXqA=s88-c-k-c0x00ffffff-no-rj",
+      "timestamp": 1624660155195,
+      "id": 45
     }
   ],
   "playlists": [
@@ -541,6 +527,18 @@
       "name": "newwwwww",
       "timestamp": 1624652048975,
       "id": 8
+    },
+    {
+      "userId": 1,
+      "name": "Playlist 6/25/2021",
+      "timestamp": 1624671432030,
+      "id": 9
+    },
+    {
+      "userId": 1,
+      "name": "Playlist 6/25/2021",
+      "timestamp": 1624671497333,
+      "id": 10
     }
   ],
   "playlistVideos": [
@@ -548,33 +546,29 @@
       "id": 1,
       "playlistId": 1,
       "userId": 1,
-      "title": "televivid - crown chorus pt1",
-      "ytId": "iUfRL3B4aOI",
-      "thumbnail": "https://i.ytimg.com/vi/iUfRL3B4aOI/default.jpg"
+      "title": "",
+      "ytId": ""
     },
     {
       "id": 2,
       "playlistId": 1,
       "userId": 1,
-      "title": "Roxy Music Deluxe Edition 2018",
-      "ytId": "7sBbr1siW7k",
-      "thumbnail": "https://i.ytimg.com/vi/7sBbr1siW7k/default.jpg"
+      "title": "",
+      "ytId": ""
     },
     {
       "id": 3,
       "playlistId": 1,
       "userId": 1,
-      "title": "Neon Lies - Pressure",
-      "ytId": "k4FhxefXvYA",
-      "thumbnail": "https://i.ytimg.com/vi/k4FhxefXvYA/default.jpg"
+      "title": "",
+      "ytId": ""
     },
     {
       "id": 4,
       "playlistId": 1,
       "userId": 1,
-      "title": "Danny Elfman - \"Insects\" (Official Video)",
-      "ytId": "PMMs2AvEIIA",
-      "thumbnail": "https://i.ytimg.com/vi/PMMs2AvEIIA/default.jpg"
+      "title": "",
+      "ytId": ""
     },
     {
       "id": 5,
@@ -604,17 +598,15 @@
       "id": 8,
       "playlistId": 1,
       "userId": 1,
-      "title": "Turquoise Days - Feed The Flame (1984)",
-      "ytId": "bWsvtQ0yldc",
-      "thumbnail": "https://i.ytimg.com/vi/bWsvtQ0yldc/default.jpg"
+      "title": "",
+      "ytId": ""
     },
     {
       "id": 9,
       "playlistId": 1,
       "userId": 1,
-      "title": "Ectoplasm Girls - Falköga",
-      "ytId": "7gShdhUD1hQ",
-      "thumbnail": "https://i.ytimg.com/vi/7gShdhUD1hQ/default.jpg"
+      "title": "",
+      "ytId": ""
     },
     {
       "id": 10,
@@ -644,9 +636,8 @@
       "id": 13,
       "playlistId": 1,
       "userId": 1,
-      "title": "Locate S,1 // Even The Good Boys Are Bad (Official Video)",
-      "ytId": "e6cRALIhNDE",
-      "thumbnail": "https://i.ytimg.com/vi/e6cRALIhNDE/default.jpg"
+      "title": "",
+      "ytId": ""
     },
     {
       "id": 14,
@@ -732,9 +723,8 @@
       "id": 24,
       "playlistId": 1,
       "userId": 1,
-      "title": "plxntkid - \"rose quartz\"",
-      "ytId": "mci9D8jJsP4",
-      "thumbnail": "https://i.ytimg.com/vi/mci9D8jJsP4/default.jpg"
+      "title": "",
+      "ytId": ""
     },
     {
       "id": 25,
@@ -772,9 +762,8 @@
       "id": 29,
       "playlistId": 1,
       "userId": 1,
-      "title": "Whispering Sons - Stalemate",
-      "ytId": "YPqJ6gh8aTU",
-      "thumbnail": "https://i.ytimg.com/vi/YPqJ6gh8aTU/default.jpg"
+      "title": "",
+      "ytId": ""
     },
     {
       "id": 30,
@@ -812,9 +801,8 @@
       "id": 34,
       "playlistId": 1,
       "userId": 1,
-      "title": "U.S. Girls - Mad As Hell (Official Video)",
-      "ytId": "XtGb5NiGBjc",
-      "thumbnail": "https://i.ytimg.com/vi/XtGb5NiGBjc/default.jpg"
+      "title": "",
+      "ytId": ""
     },
     {
       "id": 35,
@@ -844,9 +832,8 @@
       "id": 38,
       "playlistId": 1,
       "userId": 1,
-      "title": "Whispering Sons - Time",
-      "ytId": "iAk4yWUWbu8",
-      "thumbnail": "https://i.ytimg.com/vi/iAk4yWUWbu8/default.jpg"
+      "title": "",
+      "ytId": ""
     },
     {
       "id": 39,
@@ -867,26 +854,10 @@
     {
       "playlistId": 7,
       "userId": 1,
-      "title": "The Microgram : Give It Some Time",
-      "ytId": "qcx7BzD3F8E",
-      "thumbnail": "https://i.ytimg.com/vi/qcx7BzD3F8E/default.jpg",
-      "id": 164
-    },
-    {
-      "playlistId": 7,
-      "userId": 1,
       "title": "Roxy Music - Avalon (1982)",
       "ytId": "_Ra9w77mETg",
       "thumbnail": "https://i.ytimg.com/vi/_Ra9w77mETg/default.jpg",
       "id": 165
-    },
-    {
-      "playlistId": 7,
-      "userId": 1,
-      "title": "Soul Glo - \"B.O.M.B.S.\"",
-      "ytId": "yxFchFyVzwI",
-      "thumbnail": "https://i.ytimg.com/vi/yxFchFyVzwI/default.jpg",
-      "id": 166
     },
     {
       "playlistId": 7,
@@ -931,26 +902,10 @@
     {
       "playlistId": 7,
       "userId": 1,
-      "title": "Whispering Sons - Wall",
-      "ytId": "_NIDpDas108",
-      "thumbnail": "https://i.ytimg.com/vi/_NIDpDas108/default.jpg",
-      "id": 172
-    },
-    {
-      "playlistId": 7,
-      "userId": 1,
       "title": "Jorge Elbrecht / Presentable Corpse - \"Run & Hide\" [Painting Video]",
       "ytId": "DRSOMPMfNsI",
       "thumbnail": "https://i.ytimg.com/vi/DRSOMPMfNsI/default.jpg",
       "id": 173
-    },
-    {
-      "playlistId": 7,
-      "userId": 1,
-      "title": "Deleted Sin - Dry Veins",
-      "ytId": "KX4r6RMdJjQ",
-      "thumbnail": "https://i.ytimg.com/vi/KX4r6RMdJjQ/default.jpg",
-      "id": 174
     },
     {
       "playlistId": 7,
@@ -1191,6 +1146,502 @@
       "ytId": "qcx7BzD3F8E",
       "thumbnail": "https://i.ytimg.com/vi/qcx7BzD3F8E/default.jpg",
       "id": 204
+    },
+    {
+      "playlistId": 9,
+      "userId": 1,
+      "title": "Neon Lies - Pressure",
+      "ytId": "k4FhxefXvYA",
+      "thumbnail": "https://i.ytimg.com/vi/k4FhxefXvYA/default.jpg",
+      "id": 205
+    },
+    {
+      "playlistId": 9,
+      "userId": 1,
+      "title": "Geneva Jacuzzi - Casket (Album Version)",
+      "ytId": "Dfwf26A18XU",
+      "thumbnail": "https://i.ytimg.com/vi/Dfwf26A18XU/default.jpg",
+      "id": 206
+    },
+    {
+      "playlistId": 9,
+      "userId": 1,
+      "title": "Danny Elfman - \"Insects\" (Official Video)",
+      "ytId": "PMMs2AvEIIA",
+      "thumbnail": "https://i.ytimg.com/vi/PMMs2AvEIIA/default.jpg",
+      "id": 207
+    },
+    {
+      "playlistId": 9,
+      "userId": 1,
+      "title": "Ericka Irganon - Rêve De Fièvre",
+      "ytId": "K5J8g6Uw-I0",
+      "thumbnail": "https://i.ytimg.com/vi/K5J8g6Uw-I0/default.jpg",
+      "id": 208
+    },
+    {
+      "playlistId": 9,
+      "userId": 1,
+      "title": "George Clanton - Keep A Secret (Official Music Video)",
+      "ytId": "fA9tmj0RJv4",
+      "thumbnail": "https://i.ytimg.com/vi/fA9tmj0RJv4/default.jpg",
+      "id": 209
+    },
+    {
+      "playlistId": 9,
+      "userId": 1,
+      "title": "Coral Cross - Covered In Scabs",
+      "ytId": "t-B2wHBP8MY",
+      "thumbnail": "https://i.ytimg.com/vi/t-B2wHBP8MY/default.jpg",
+      "id": 210
+    },
+    {
+      "playlistId": 9,
+      "userId": 1,
+      "title": "Fujee - Follow Me",
+      "ytId": "qXeamLCdmmw",
+      "thumbnail": "https://i.ytimg.com/vi/qXeamLCdmmw/default.jpg",
+      "id": 211
+    },
+    {
+      "playlistId": 9,
+      "userId": 1,
+      "title": "Brothers Of Craig - Just One Of Those Days (Subtitulada)",
+      "ytId": "Auh_6HAFHgI",
+      "thumbnail": "https://i.ytimg.com/vi/Auh_6HAFHgI/default.jpg",
+      "id": 212
+    },
+    {
+      "playlistId": 9,
+      "userId": 1,
+      "title": "Antena - Camino del Sol (1981)",
+      "ytId": "vkASEGI_a_E",
+      "thumbnail": "https://i.ytimg.com/vi/vkASEGI_a_E/default.jpg",
+      "id": 213
+    },
+    {
+      "playlistId": 9,
+      "userId": 1,
+      "title": "Broadcast - Valerie (And Her Week Of Wonders)",
+      "ytId": "as5ZdjYGdRY",
+      "thumbnail": "https://i.ytimg.com/vi/as5ZdjYGdRY/default.jpg",
+      "id": 214
+    },
+    {
+      "playlistId": 9,
+      "userId": 1,
+      "title": "U.S. Girls feat. Rich Morel - Santa Stay Home (Explicit Version) (Official Video)",
+      "ytId": "tsQj-FBCngw",
+      "thumbnail": "https://i.ytimg.com/vi/tsQj-FBCngw/default.jpg",
+      "id": 215
+    },
+    {
+      "playlistId": 9,
+      "userId": 1,
+      "title": "Violens - Der Microarc",
+      "ytId": "qpRICNLMPYI",
+      "thumbnail": "https://i.ytimg.com/vi/qpRICNLMPYI/default.jpg",
+      "id": 216
+    },
+    {
+      "playlistId": 9,
+      "userId": 1,
+      "title": "The KVB - Violet Noon",
+      "ytId": "hkcnIo-rigE",
+      "thumbnail": "https://i.ytimg.com/vi/hkcnIo-rigE/default.jpg",
+      "id": 218
+    },
+    {
+      "playlistId": 9,
+      "userId": 1,
+      "title": "The Garden - Kiss My Super Bowl Ring (Full Set)",
+      "ytId": "F_q_QTLBi8U",
+      "thumbnail": "https://i.ytimg.com/vi/F_q_QTLBi8U/default.jpg",
+      "id": 219
+    },
+    {
+      "playlistId": 9,
+      "userId": 1,
+      "title": "JOON \"GOOD TIMES\" (Single)",
+      "ytId": "9c7-Q3ycLFA",
+      "thumbnail": "https://i.ytimg.com/vi/9c7-Q3ycLFA/default.jpg",
+      "id": 220
+    },
+    {
+      "playlistId": 9,
+      "userId": 1,
+      "title": "Boy Harsher - LA (Instrumental)",
+      "ytId": "hoNLUf_uo6I",
+      "thumbnail": "https://i.ytimg.com/vi/hoNLUf_uo6I/default.jpg",
+      "id": 221
+    },
+    {
+      "playlistId": 9,
+      "userId": 1,
+      "title": "Vanilla - All In My Mind (Music Video)",
+      "ytId": "aiae6xAIZOQ",
+      "thumbnail": "https://i.ytimg.com/vi/aiae6xAIZOQ/default.jpg",
+      "id": 222
+    },
+    {
+      "playlistId": 9,
+      "userId": 1,
+      "title": "Le Syndicat Électronique - At The End",
+      "ytId": "8Ik2HMe1gKs",
+      "thumbnail": "https://i.ytimg.com/vi/8Ik2HMe1gKs/default.jpg",
+      "id": 224
+    },
+    {
+      "playlistId": 9,
+      "userId": 1,
+      "title": "Experimental Products - Endless Plane of Fortune",
+      "ytId": "YHqognRnZQI",
+      "thumbnail": "https://i.ytimg.com/vi/YHqognRnZQI/default.jpg",
+      "id": 225
+    },
+    {
+      "playlistId": 9,
+      "userId": 1,
+      "title": "Coral Cross - Covered In Scabs",
+      "ytId": "t-B2wHBP8MY",
+      "thumbnail": "https://i.ytimg.com/vi/t-B2wHBP8MY/default.jpg",
+      "id": 226
+    },
+    {
+      "playlistId": 9,
+      "userId": 1,
+      "title": "La Svergognata (1974) - Music by Berto Pisano",
+      "ytId": "bguScS3T04U",
+      "thumbnail": "https://i.ytimg.com/vi/bguScS3T04U/default.jpg",
+      "id": 227
+    },
+    {
+      "playlistId": 9,
+      "userId": 1,
+      "title": "Whispering Sons - Stalemate",
+      "ytId": "YPqJ6gh8aTU",
+      "thumbnail": "https://i.ytimg.com/vi/YPqJ6gh8aTU/default.jpg",
+      "id": 228
+    },
+    {
+      "playlistId": 9,
+      "userId": 1,
+      "title": "Equinoxious - Marsnik-1",
+      "ytId": "mBt3uGLUKTo",
+      "thumbnail": "https://i.ytimg.com/vi/mBt3uGLUKTo/default.jpg",
+      "id": 229
+    },
+    {
+      "playlistId": 9,
+      "userId": 1,
+      "title": "The Jaynes - How many times (1994)",
+      "ytId": "MBfoT9dV_Ck",
+      "thumbnail": "https://i.ytimg.com/vi/MBfoT9dV_Ck/default.jpg",
+      "id": 230
+    },
+    {
+      "playlistId": 9,
+      "userId": 1,
+      "title": "Imiafan-Someone Else (makina girgir remix)",
+      "ytId": "sV3XHCnkUv0",
+      "thumbnail": "https://i.ytimg.com/vi/sV3XHCnkUv0/default.jpg",
+      "id": 231
+    },
+    {
+      "playlistId": 9,
+      "userId": 1,
+      "title": "Molly Burch // Last Christmas [ft. Kate Berlant and John Early] (Official Video)",
+      "ytId": "niwpJhmD4RQ",
+      "thumbnail": "https://i.ytimg.com/vi/niwpJhmD4RQ/default.jpg",
+      "id": 232
+    },
+    {
+      "playlistId": 9,
+      "userId": 1,
+      "title": "U.S. Girls - Mad As Hell (Official Video)",
+      "ytId": "XtGb5NiGBjc",
+      "thumbnail": "https://i.ytimg.com/vi/XtGb5NiGBjc/default.jpg",
+      "id": 233
+    },
+    {
+      "playlistId": 9,
+      "userId": 1,
+      "title": "Bauhaus - She's In Parties",
+      "ytId": "Qxqq5vahHKk",
+      "thumbnail": "https://i.ytimg.com/vi/Qxqq5vahHKk/default.jpg",
+      "id": 234
+    },
+    {
+      "playlistId": 9,
+      "userId": 1,
+      "title": "Puzzle - Half Of Me",
+      "ytId": "Ts7XJqNdSJk",
+      "thumbnail": "https://i.ytimg.com/vi/Ts7XJqNdSJk/default.jpg",
+      "id": 235
+    },
+    {
+      "playlistId": 9,
+      "userId": 1,
+      "title": "Gregg Kowalsky - Maliblue Dream Sequence [Official Audio]",
+      "ytId": "dkugbd-StsQ",
+      "thumbnail": "https://i.ytimg.com/vi/dkugbd-StsQ/default.jpg",
+      "id": 236
+    },
+    {
+      "playlistId": 9,
+      "userId": 1,
+      "title": "Whispering Sons - Time",
+      "ytId": "iAk4yWUWbu8",
+      "thumbnail": "https://i.ytimg.com/vi/iAk4yWUWbu8/default.jpg",
+      "id": 237
+    },
+    {
+      "playlistId": 9,
+      "userId": 1,
+      "title": "JOON \"WATCH THE SKY\" (Official Video)",
+      "ytId": "UIARIDX9c1I",
+      "thumbnail": "https://i.ytimg.com/vi/UIARIDX9c1I/default.jpg",
+      "id": 238
+    },
+    {
+      "playlistId": 9,
+      "userId": 1,
+      "title": "Dean Blunt - ZaZa (Music Video)",
+      "ytId": "xMHwkiWmHAw",
+      "thumbnail": "https://i.ytimg.com/vi/xMHwkiWmHAw/default.jpg",
+      "id": 239
+    },
+    {
+      "playlistId": 10,
+      "userId": 1,
+      "title": "Geneva Jacuzzi - Casket (Album Version)",
+      "ytId": "Dfwf26A18XU",
+      "thumbnail": "https://i.ytimg.com/vi/Dfwf26A18XU/default.jpg",
+      "id": 240
+    },
+    {
+      "playlistId": 10,
+      "userId": 1,
+      "title": "George Clanton - Keep A Secret (Official Music Video)",
+      "ytId": "fA9tmj0RJv4",
+      "thumbnail": "https://i.ytimg.com/vi/fA9tmj0RJv4/default.jpg",
+      "id": 241
+    },
+    {
+      "playlistId": 10,
+      "userId": 1,
+      "title": "Coral Cross - Covered In Scabs",
+      "ytId": "t-B2wHBP8MY",
+      "thumbnail": "https://i.ytimg.com/vi/t-B2wHBP8MY/default.jpg",
+      "id": 242
+    },
+    {
+      "playlistId": 10,
+      "userId": 1,
+      "title": "Fujee - Follow Me",
+      "ytId": "qXeamLCdmmw",
+      "thumbnail": "https://i.ytimg.com/vi/qXeamLCdmmw/default.jpg",
+      "id": 243
+    },
+    {
+      "playlistId": 10,
+      "userId": 1,
+      "title": "Brothers Of Craig - Just One Of Those Days (Subtitulada)",
+      "ytId": "Auh_6HAFHgI",
+      "thumbnail": "https://i.ytimg.com/vi/Auh_6HAFHgI/default.jpg",
+      "id": 244
+    },
+    {
+      "playlistId": 10,
+      "userId": 1,
+      "title": "Ericka Irganon - Rêve De Fièvre",
+      "ytId": "K5J8g6Uw-I0",
+      "thumbnail": "https://i.ytimg.com/vi/K5J8g6Uw-I0/default.jpg",
+      "id": 245
+    },
+    {
+      "playlistId": 10,
+      "userId": 1,
+      "title": "Antena - Camino del Sol (1981)",
+      "ytId": "vkASEGI_a_E",
+      "thumbnail": "https://i.ytimg.com/vi/vkASEGI_a_E/default.jpg",
+      "id": 246
+    },
+    {
+      "playlistId": 10,
+      "userId": 1,
+      "title": "Broadcast - Valerie (And Her Week Of Wonders)",
+      "ytId": "as5ZdjYGdRY",
+      "thumbnail": "https://i.ytimg.com/vi/as5ZdjYGdRY/default.jpg",
+      "id": 247
+    },
+    {
+      "playlistId": 10,
+      "userId": 1,
+      "title": "U.S. Girls feat. Rich Morel - Santa Stay Home (Explicit Version) (Official Video)",
+      "ytId": "tsQj-FBCngw",
+      "thumbnail": "https://i.ytimg.com/vi/tsQj-FBCngw/default.jpg",
+      "id": 248
+    },
+    {
+      "playlistId": 10,
+      "userId": 1,
+      "title": "Violens - Der Microarc",
+      "ytId": "qpRICNLMPYI",
+      "thumbnail": "https://i.ytimg.com/vi/qpRICNLMPYI/default.jpg",
+      "id": 249
+    },
+    {
+      "playlistId": 10,
+      "userId": 1,
+      "title": "Sessa - Sereia Sentimental",
+      "ytId": "ob_mBthApTM",
+      "thumbnail": "https://i.ytimg.com/vi/ob_mBthApTM/default.jpg",
+      "id": 250
+    },
+    {
+      "playlistId": 10,
+      "userId": 1,
+      "title": "The KVB - Violet Noon",
+      "ytId": "hkcnIo-rigE",
+      "thumbnail": "https://i.ytimg.com/vi/hkcnIo-rigE/default.jpg",
+      "id": 251
+    },
+    {
+      "playlistId": 10,
+      "userId": 1,
+      "title": "The Garden - Kiss My Super Bowl Ring (Full Set)",
+      "ytId": "F_q_QTLBi8U",
+      "thumbnail": "https://i.ytimg.com/vi/F_q_QTLBi8U/default.jpg",
+      "id": 252
+    },
+    {
+      "playlistId": 10,
+      "userId": 1,
+      "title": "JOON \"GOOD TIMES\" (Single)",
+      "ytId": "9c7-Q3ycLFA",
+      "thumbnail": "https://i.ytimg.com/vi/9c7-Q3ycLFA/default.jpg",
+      "id": 253
+    },
+    {
+      "playlistId": 10,
+      "userId": 1,
+      "title": "Boy Harsher - LA (Instrumental)",
+      "ytId": "hoNLUf_uo6I",
+      "thumbnail": "https://i.ytimg.com/vi/hoNLUf_uo6I/default.jpg",
+      "id": 254
+    },
+    {
+      "playlistId": 10,
+      "userId": 1,
+      "title": "Vanilla - All In My Mind (Music Video)",
+      "ytId": "aiae6xAIZOQ",
+      "thumbnail": "https://i.ytimg.com/vi/aiae6xAIZOQ/default.jpg",
+      "id": 255
+    },
+    {
+      "playlistId": 10,
+      "userId": 1,
+      "title": "Le Syndicat Électronique - At The End",
+      "ytId": "8Ik2HMe1gKs",
+      "thumbnail": "https://i.ytimg.com/vi/8Ik2HMe1gKs/default.jpg",
+      "id": 256
+    },
+    {
+      "playlistId": 10,
+      "userId": 1,
+      "title": "Experimental Products - Endless Plane of Fortune",
+      "ytId": "YHqognRnZQI",
+      "thumbnail": "https://i.ytimg.com/vi/YHqognRnZQI/default.jpg",
+      "id": 257
+    },
+    {
+      "playlistId": 10,
+      "userId": 1,
+      "title": "Coral Cross - Covered In Scabs",
+      "ytId": "t-B2wHBP8MY",
+      "thumbnail": "https://i.ytimg.com/vi/t-B2wHBP8MY/default.jpg",
+      "id": 258
+    },
+    {
+      "playlistId": 10,
+      "userId": 1,
+      "title": "La Svergognata (1974) - Music by Berto Pisano",
+      "ytId": "bguScS3T04U",
+      "thumbnail": "https://i.ytimg.com/vi/bguScS3T04U/default.jpg",
+      "id": 259
+    },
+    {
+      "playlistId": 10,
+      "userId": 1,
+      "title": "Equinoxious - Marsnik-1",
+      "ytId": "mBt3uGLUKTo",
+      "thumbnail": "https://i.ytimg.com/vi/mBt3uGLUKTo/default.jpg",
+      "id": 260
+    },
+    {
+      "playlistId": 10,
+      "userId": 1,
+      "title": "The Jaynes - How many times (1994)",
+      "ytId": "MBfoT9dV_Ck",
+      "thumbnail": "https://i.ytimg.com/vi/MBfoT9dV_Ck/default.jpg",
+      "id": 261
+    },
+    {
+      "playlistId": 10,
+      "userId": 1,
+      "title": "Imiafan-Someone Else (makina girgir remix)",
+      "ytId": "sV3XHCnkUv0",
+      "thumbnail": "https://i.ytimg.com/vi/sV3XHCnkUv0/default.jpg",
+      "id": 262
+    },
+    {
+      "playlistId": 10,
+      "userId": 1,
+      "title": "Molly Burch // Last Christmas [ft. Kate Berlant and John Early] (Official Video)",
+      "ytId": "niwpJhmD4RQ",
+      "thumbnail": "https://i.ytimg.com/vi/niwpJhmD4RQ/default.jpg",
+      "id": 263
+    },
+    {
+      "playlistId": 10,
+      "userId": 1,
+      "title": "Bauhaus - She's In Parties",
+      "ytId": "Qxqq5vahHKk",
+      "thumbnail": "https://i.ytimg.com/vi/Qxqq5vahHKk/default.jpg",
+      "id": 264
+    },
+    {
+      "playlistId": 10,
+      "userId": 1,
+      "title": "Puzzle - Half Of Me",
+      "ytId": "Ts7XJqNdSJk",
+      "thumbnail": "https://i.ytimg.com/vi/Ts7XJqNdSJk/default.jpg",
+      "id": 265
+    },
+    {
+      "playlistId": 10,
+      "userId": 1,
+      "title": "Gregg Kowalsky - Maliblue Dream Sequence [Official Audio]",
+      "ytId": "dkugbd-StsQ",
+      "thumbnail": "https://i.ytimg.com/vi/dkugbd-StsQ/default.jpg",
+      "id": 266
+    },
+    {
+      "playlistId": 10,
+      "userId": 1,
+      "title": "JOON \"WATCH THE SKY\" (Official Video)",
+      "ytId": "UIARIDX9c1I",
+      "thumbnail": "https://i.ytimg.com/vi/UIARIDX9c1I/default.jpg",
+      "id": 267
+    },
+    {
+      "playlistId": 10,
+      "userId": 1,
+      "title": "Dean Blunt - ZaZa (Music Video)",
+      "ytId": "xMHwkiWmHAw",
+      "thumbnail": "https://i.ytimg.com/vi/xMHwkiWmHAw/default.jpg",
+      "id": 268
     }
   ]
 }
