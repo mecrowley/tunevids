@@ -14,6 +14,7 @@ export const SavedVideoList = () => {
     const { getYoutubeVideoById } = useContext(YoutubeDataContext)
     const [playlists, setPlaylists] = useState([])
     const [video, setVideo] = useState({})
+    const [videoAdded, setVideoAdded] = useState(null)
 
     useEffect(() => {
         getSavedVideosByUser(parseInt(localStorage.getItem("tv_user")))
@@ -39,23 +40,32 @@ export const SavedVideoList = () => {
     const handleAddVideo = () => {
         const videoURL = video.url
         const [, youtubeId] = videoURL.split(".be/")
-        getYoutubeVideoById(youtubeId)
-            .then((response) => {
-                console.log(response.items[0])
-                addSavedVideo({
-                    userId: parseInt(localStorage.getItem("tv_user")),
-                    title: response.items[0].snippet.title,
-                    ytId: youtubeId,
-                    ytChannelId: response.items[0].snippet.channelId,
-                    channelName: response.items[0].snippet.channelTitle,
-                    duration: response.items[0].contentDetails.duration,
-                    thumbnail: response.items[0].snippet.thumbnails.default.url,
-                    timestamp: Date.now()
+        if (youtubeId) {
+            getYoutubeVideoById(youtubeId)
+                .then((response) => {
+                    if (response.items[0]) {
+                        addSavedVideo({
+                            userId: parseInt(localStorage.getItem("tv_user")),
+                            title: response.items[0].snippet.title,
+                            ytId: youtubeId,
+                            ytChannelId: response.items[0].snippet.channelId,
+                            channelName: response.items[0].snippet.channelTitle,
+                            duration: response.items[0].contentDetails.duration,
+                            thumbnail: response.items[0].snippet.thumbnails.default.url,
+                            timestamp: Date.now()
+                        })
+                            .then(() => {
+                                setVideo({ url: "" })
+                                setVideoAdded(null)
+                                getSavedVideosByUser(parseInt(localStorage.getItem("tv_user")))
+                            })
+                    } else {
+                        setVideoAdded(<div className="fail">Video not added!  Please enter a valid url</div>)
+                    }
                 })
-            }).then(() => {
-                setVideo({ url: "" })
-                getSavedVideosByUser(parseInt(localStorage.getItem("tv_user")))
-            })
+        } else {
+            setVideoAdded(<div className="fail">Video not added!  Please enter a valid url</div>)
+        }
     }
 
     return (
@@ -74,7 +84,8 @@ export const SavedVideoList = () => {
                             <input type="text" id="url" className="input-field" required autoFocus placeholder="Video url" value={video.url} onChange={handleControlledInputChange} />
                             <button className="addButton" onClick={handleAddVideo}>
                                 Submit
-            </button>
+                            </button>
+                            {videoAdded}
                         </fieldset>
                     </div>
 
@@ -85,36 +96,36 @@ export const SavedVideoList = () => {
                                 return (
                                     <>
                                         <div className="video flex-container">
-                                        <div className="icon">
-                                {savedUserVideos.find(sv => sv.title === v.title) ?
-                                    <FavoriteIcon onClick={e => {
-                                        e.preventDefault()
-                                        deleteSavedVideo(savedUserVideos.find(sv => sv.title === v.title).id)
-                                        .then(() => {
-                                            getSavedVideosByUser(parseInt(localStorage.getItem("tv_user")))
-                                        })
-                                    }} /> :
-                                    <FavoriteBorderIcon onClick={e => {
-                                        e.preventDefault()
-                                        getYoutubeVideoById(v.ytId)
-                                            .then(response => {
-                                                addSavedVideo({
-                                                    userId: parseInt(localStorage.getItem("tv_user")),
-                                                    title: response.items[0].snippet.title,
-                                                    ytId: v.ytId,
-                                                    ytChannelId: response.items[0].snippet.channelId,
-                                                    channelName: response.items[0].snippet.channelTitle,
-                                                    duration: response.items[0].contentDetails.duration,
-                                                    thumbnail: response.items[0].snippet.thumbnails.default.url,
-                                                    timestamp: Date.now()
-                                                })
-                                                .then(() => {
-                                                    getSavedVideosByUser(parseInt(localStorage.getItem("tv_user")))
-                                                })
-                                            })
-                                    }
-                                    } />}
-                            </div>
+                                            <div className="icon">
+                                                {savedUserVideos.find(sv => sv.title === v.title) ?
+                                                    <FavoriteIcon onClick={e => {
+                                                        e.preventDefault()
+                                                        deleteSavedVideo(savedUserVideos.find(sv => sv.title === v.title).id)
+                                                            .then(() => {
+                                                                getSavedVideosByUser(parseInt(localStorage.getItem("tv_user")))
+                                                            })
+                                                    }} /> :
+                                                    <FavoriteBorderIcon onClick={e => {
+                                                        e.preventDefault()
+                                                        getYoutubeVideoById(v.ytId)
+                                                            .then(response => {
+                                                                addSavedVideo({
+                                                                    userId: parseInt(localStorage.getItem("tv_user")),
+                                                                    title: response.items[0].snippet.title,
+                                                                    ytId: v.ytId,
+                                                                    ytChannelId: response.items[0].snippet.channelId,
+                                                                    channelName: response.items[0].snippet.channelTitle,
+                                                                    duration: response.items[0].contentDetails.duration,
+                                                                    thumbnail: response.items[0].snippet.thumbnails.default.url,
+                                                                    timestamp: Date.now()
+                                                                })
+                                                                    .then(() => {
+                                                                        getSavedVideosByUser(parseInt(localStorage.getItem("tv_user")))
+                                                                    })
+                                                            })
+                                                    }
+                                                    } />}
+                                            </div>
                                             <div className="title">
                                                 {v.title}
                                             </div>

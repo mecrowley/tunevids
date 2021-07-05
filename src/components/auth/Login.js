@@ -31,10 +31,10 @@ export const Login = props => {
 
     return (
         <main className="container--login">
-            <dialog className="dialog dialog--auth" ref={existDialog}>
+            {/* <dialog className="dialog dialog--auth" ref={existDialog}>
                 <div>User does not exist</div>
                 <button className="button--close" onClick={e => existDialog.current.close()}>Close</button>
-            </dialog>
+            </dialog> */}
 
             <section>
                 <h1>Tune Vids</h1>

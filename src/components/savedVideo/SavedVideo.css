@@ -29,3 +29,7 @@
     border-bottom: solid black 1px;
     padding: 0.3rem;
 }
+
+.fail {
+  color: red;
+}

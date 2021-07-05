@@ -1,5 +1,7 @@
-import React, { useRef } from "react"
+import React, { useContext, useRef } from "react"
 import { useHistory } from "react-router-dom"
+import { PlaylistContext } from "../playlist/PlaylistProvider"
+import { PlaylistVideoContext } from "../playlist/PlaylistVideoProvider"
 import "./Login.css"
 
 export const Register = (props) => {
@@ -8,6 +10,8 @@ export const Register = (props) => {
     const email = useRef()
     const conflictDialog = useRef()
     const history = useHistory()
+    const { addPlaylist } = useContext(PlaylistContext)
+    const { addPlaylistVideo } = useContext(PlaylistVideoContext)
 
     const existingUserCheck = () => {
         return fetch(`http://localhost:8088/users?email=${email.current.value}`)
@@ -37,7 +41,23 @@ export const Register = (props) => {
                         .then(createdUser => {
                             if (createdUser.hasOwnProperty("id")) {
                                 localStorage.setItem("tv_user", createdUser.id)
-                                history.push("/")
+                                addPlaylist({
+                                    userId: createdUser.id,
+                                    name: "genList",
+                                    timestamp: Date.now()
+                                })
+                                .then(playlist => {
+                                    for (let i = 0; i < 50; i++) {
+                                        addPlaylistVideo({
+                                            playlistId: playlist.id,
+                                            userId: createdUser.id,
+                                            title: "",
+                                            ytId: "",
+                                            thumbnail: ""
+                                        })
+                                    }
+                                })
+                                history.push("/register/addvideos")
                             }
                         })
                 }
@@ -56,7 +76,7 @@ export const Register = (props) => {
                 <button className="button--close" onClick={e => conflictDialog.current.close()}>Close</button>
             </dialog>
 
-                <h2 className="h3 mb-3 font-weight-normal register__h">Sign up for Kandy Rewards</h2>
+                <h2 className="h3 mb-3 font-weight-normal register__h">Create a New Account</h2>
             <form className="form--login" onSubmit={handleRegister}>
                 <fieldset>
                     <label htmlFor="firstName"> First Name </label>
@@ -71,7 +91,7 @@ export const Register = (props) => {
                     <input ref={email} type="email" name="email" className="form-control" placeholder="Email address" required />
                 </fieldset>
                 <fieldset>
-                    <button type="submit"> Sign in </button>
+                    <button type="submit"> Submit </button>
                 </fieldset>
             </form>
         </main>

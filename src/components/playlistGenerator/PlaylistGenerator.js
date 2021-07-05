@@ -22,15 +22,20 @@ export const PlaylistGenerator = () => {
             .then(getUserChannelsByUser(parseInt(localStorage.getItem("tv_user"))))
     }, [])
 
-    useEffect(() => {
-        getPlaylistsByUser(parseInt(localStorage.getItem("tv_user")))
-            .then(response => {
-                const genPlaylist = response.find(p => p.name === "genList")
-                getPlaylistVideosByPlaylistId(genPlaylist.id)
-                response.shift()
-                setPlaylists(response)
-            })
-    }, [])
+        useEffect(() => {
+            getPlaylistsByUser(parseInt(localStorage.getItem("tv_user")))
+                .then(response => {
+                    if (response.length < 1) {
+                        getPlaylistVideosByPlaylistId(response.id)
+                        setPlaylists(response)
+                    } else {
+                        const genPlaylist = response.find(p => p.name === "genList")
+                        getPlaylistVideosByPlaylistId(genPlaylist.id)
+                        response.shift()
+                        setPlaylists(response)
+                    }
+                })
+        }, [])
 
     return (
         <>
