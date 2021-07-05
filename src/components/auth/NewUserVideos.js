@@ -35,16 +35,19 @@ export const NewUserVideos = () => {
             getYoutubeVideoById(u)
             .then((response) => {
                 console.log(response.items[0])
-                addSavedVideo({
-                    userId: parseInt(localStorage.getItem("tv_user")),
-                    title: response.items[0].snippet.title,
-                    ytId: u,
-                    ytChannelId: response.items[0].snippet.channelId,
-                    channelName: response.items[0].snippet.channelTitle,
-                    duration: response.items[0].contentDetails.duration,
-                    thumbnail: response.items[0].snippet.thumbnails.default.url,
-                    timestamp: Date.now()
-                })
+                if (response.items[0]) {
+
+                    addSavedVideo({
+                        userId: parseInt(localStorage.getItem("tv_user")),
+                        title: response.items[0].snippet.title,
+                        ytId: u,
+                        ytChannelId: response.items[0].snippet.channelId,
+                        channelName: response.items[0].snippet.channelTitle,
+                        duration: response.items[0].contentDetails.duration,
+                        thumbnail: response.items[0].snippet.thumbnails.default.url,
+                        timestamp: Date.now()
+                    })
+                } else {return}
             })
         })
         ).then(() => {
@@ -55,9 +58,9 @@ export const NewUserVideos = () => {
 
     return (
         <>
-
-            <h3>Start by adding the URLs of up to 5 Youtube Videos that you like</h3>
-            You can also skip this for now, and do it later.
+        <div className="add-videos-form">
+            <h3 className="">Start by adding the URLs of up to 5 Youtube Videos that you like</h3>
+            <div className="center">You can also skip this for now, and do it later.</div>
             <div className="addInput">
                 <fieldset>
                     <input type="text" id="url1" className="input-field" required autoFocus placeholder="Video url" value={video.url1} onChange={handleControlledInputChange} />
@@ -74,11 +77,11 @@ export const NewUserVideos = () => {
                 <fieldset>
                     <input type="text" id="url5" className="input-field" required autoFocus placeholder="Video url" value={video.url5} onChange={handleControlledInputChange} />
                 </fieldset>
-                <button className="addButton" onClick={handleAddVideos}>
+                <button className="next-button" onClick={handleAddVideos}>
                     Next
                 </button>
             </div>
-
+            </div>
         </>
     )
 }

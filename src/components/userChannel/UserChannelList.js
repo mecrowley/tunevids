@@ -7,6 +7,7 @@ export const UserChannelList = () => {
     const { getUserChannelsByUser, userChannels, addUserChannel, deleteUserChannel } = useContext(UserChannelContext)
     const { getYoutubeChannelById, getYoutubeChannelByUserName } = useContext(YoutubeDataContext)
     const [channel, setChannel] = useState({})
+    const [channelAdded, setChannelAdded] = useState(null)
 
     useEffect(() => {
         getUserChannelsByUser(parseInt(localStorage.getItem("tv_user")))
@@ -22,41 +23,62 @@ export const UserChannelList = () => {
         setChannel(newChannel)
     }
 
-    const handleAddChannelById = () => {
-        getYoutubeChannelById(channel.id)
+    const handleAddChannel = () => {
+            const channelURL = channel.url
+            const channelURLsplit = channelURL.split("/")
+            const hasChannelId = channelURLsplit.includes("channel")
+            const hasChannelUserName = channelURLsplit.includes("user")
+            const hasCustomName = channelURLsplit.includes("c")
+            if (hasChannelId) {
+                const channelId = channelURLsplit[channelURLsplit.indexOf("channel") + 1]
+                getYoutubeChannelById(channelId)
             .then((response) => {
-                console.log(response.items[0])
-                addUserChannel({
-                    userId: parseInt(localStorage.getItem("tv_user")),
-                    title: response.items[0].snippet.title,
-                    ytId: response.items[0].id,
-                    uploadsId: response.items[0].contentDetails.relatedPlaylists.uploads,
-                    thumbnail: response.items[0].snippet.thumbnails.default.url,
-                    timestamp: Date.now()
-                })
+                if (response.items) {
+                    addUserChannel({
+                        userId: parseInt(localStorage.getItem("tv_user")),
+                        title: response.items[0].snippet.title,
+                        ytId: response.items[0].id,
+                        uploadsId: response.items[0].contentDetails.relatedPlaylists.uploads,
+                        thumbnail: response.items[0].snippet.thumbnails.default.url,
+                        timestamp: Date.now()
+                    })
+                    .then(() => {
+                        setChannel({ url: "" })
+                        setChannelAdded(null)
+                        getUserChannelsByUser(parseInt(localStorage.getItem("tv_user")))
+                    })
+                } else {
+                    setChannelAdded(<div className="fail">Channel not found</div>)
+                }
             })
-            .then(() => {
-                setChannel({ id: "" })
-                getUserChannelsByUser(parseInt(localStorage.getItem("tv_user")))
+            } else if (hasChannelUserName) {
+                const channelUserName = channelURLsplit[channelURLsplit.indexOf("user") + 1]
+                getYoutubeChannelByUserName(channelUserName)
+            .then((response) => {
+                if (response.items) {
+                    addUserChannel({
+                        userId: parseInt(localStorage.getItem("tv_user")),
+                        title: response.items[0].snippet.title,
+                        ytId: response.items[0].id,
+                        uploadsId: response.items[0].contentDetails.relatedPlaylists.uploads,
+                        thumbnail: response.items[0].snippet.thumbnails.default.url,
+                        timestamp: Date.now()
+                    })
+                    .then(() => {
+                        setChannel({ url: "" })
+                        setChannelAdded(null)
+                        getUserChannelsByUser(parseInt(localStorage.getItem("tv_user")))
+                    })
+                } else {
+                    setChannelAdded(<div className="fail">Channel not found</div>)
+                }
             })
-    }
+            } else if (hasCustomName) {
+                setChannelAdded(<div className="fail">Cannot add Channel with custom name in url</div>)
+            } else if (!hasChannelId && !hasChannelUserName && !hasCustomName) {
+                setChannelAdded(<div className="fail">Channel not added! Please enter a valid url</div>)
+            }
 
-    const handleAddChannelByUser = () => {
-        getYoutubeChannelByUserName(channel.userName)
-            .then((response) => {
-                addUserChannel({
-                    userId: parseInt(localStorage.getItem("tv_user")),
-                    title: response.items[0].snippet.title,
-                    ytId: response.items[0].id,
-                    uploadsId: response.items[0].contentDetails.relatedPlaylists.uploads,
-                    thumbnail: response.items[0].snippet.thumbnails.default.url,
-                    timestamp: Date.now()
-                })
-            })
-            .then(() => {
-                setChannel({ userName: "" })
-                getUserChannelsByUser(parseInt(localStorage.getItem("tv_user")))
-            })
     }
 
 
@@ -66,18 +88,12 @@ export const UserChannelList = () => {
             <h1>Saved Channels</h1>
             <div className="addInput">
                 <fieldset>
-                    <label htmlFor="url">Add Channel by Id:</label>
-                    <input type="text" id="id" className="input-field" required autoFocus placeholder="Channel Id" value={channel.id} onChange={handleControlledInputChange} />
-                    <button className="addButton" onClick={handleAddChannelById}>
+                    <label htmlFor="url">Add Channel:</label>
+                    <input type="text" id="url" className="input-field" required autoFocus placeholder="Channel url" value={channel.url} onChange={handleControlledInputChange} />
+                    <button className="addButton" onClick={handleAddChannel}>
                         Submit
             </button>
-                </fieldset>
-                <fieldset>
-                    <label htmlFor="url">Add Channel by User Name:</label>
-                    <input type="text" id="userName" className="input-field" required autoFocus placeholder="User Name" value={channel.userName} onChange={handleControlledInputChange} />
-                    <button className="addButton" onClick={handleAddChannelByUser}>
-                        Submit
-            </button>
+            {channelAdded}
                 </fieldset>
             </div>
 

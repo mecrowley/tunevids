@@ -76,3 +76,17 @@ fieldset {
 .link--register a:link {
   color: black;
 }
+
+.center {
+    text-align: center;
+}
+
+.add-videos-form {
+    margin-top: 4rem;
+}
+
+.next-button {
+    width: 4rem;
+    display: block;
+    margin: 0 auto;
+}
