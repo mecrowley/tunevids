@@ -17,21 +17,15 @@ export const NewUserVideos = () => {
 
     const handleAddVideos = () => {
         const videoURLs = []
-        const video1URL = video.url1
-        const [, youtubeId1] = video1URL.split(".be/")
-        if (youtubeId1) {videoURLs.push(youtubeId1)}
-        const video2URL = video.url2
-        const [, youtubeId2] = video2URL.split(".be/")
-         if (youtubeId2) {videoURLs.push(youtubeId2)}
-        const video3URL = video.url3
-        const [, youtubeId3] = video3URL.split(".be/")
-        if (youtubeId3) {videoURLs.push(youtubeId3)}
-        const video4URL = video.url4
-        const [, youtubeId4] = video4URL.split(".be/")
-        if (youtubeId4) {videoURLs.push(youtubeId4)}
-        const video5URL = video.url5
-        const [, youtubeId5] = video5URL.split(".be/")
-        if (youtubeId5) {videoURLs.push(youtubeId5)}
+        for (const [key, value] of Object.entries(video)) {
+            const [, youtubeShareId] = value.split(".be/")
+            const [, youtubeBrowserId] = value.split("=")
+        if (youtubeShareId) {
+            videoURLs.push(youtubeShareId)
+        } else if (youtubeBrowserId) {
+            videoURLs.push(youtubeBrowserId)
+        } else {continue}
+        }
         if (videoURLs.length > 0) {
         Promise.all(videoURLs.map(u => {
             getYoutubeVideoById(u)
@@ -62,7 +56,7 @@ export const NewUserVideos = () => {
 
     return (
         <>
-        <div className="add-videos-form">
+        <div className="add-form">
             <h3 className="">Start by adding the URLs of up to 5 Youtube Videos that you like</h3>
             <div className="center">You can also skip this for now, and do it later.</div>
             <div className="addInput">

@@ -39,33 +39,39 @@ export const SavedVideoList = () => {
 
     const handleAddVideo = () => {
         const videoURL = video.url
-        const [, youtubeId] = videoURL.split(".be/")
-        if (youtubeId) {
-            getYoutubeVideoById(youtubeId)
-                .then((response) => {
-                    if (response.items[0]) {
-                        addSavedVideo({
-                            userId: parseInt(localStorage.getItem("tv_user")),
-                            title: response.items[0].snippet.title,
-                            ytId: youtubeId,
-                            ytChannelId: response.items[0].snippet.channelId,
-                            channelName: response.items[0].snippet.channelTitle,
-                            duration: response.items[0].contentDetails.duration,
-                            thumbnail: response.items[0].snippet.thumbnails.default.url,
-                            timestamp: Date.now()
-                        })
-                            .then(() => {
-                                setVideo({ url: "" })
-                                setVideoAdded(null)
-                                getSavedVideosByUser(parseInt(localStorage.getItem("tv_user")))
-                            })
-                    } else {
-                        setVideoAdded(<div className="fail">Video not added!  Please enter a valid url</div>)
-                    }
-                })
+        const [, youtubeShareId] = videoURL.split(".be/")
+        const [, youtubeBrowserId] = videoURL.split("=")
+        let youtubeId = null
+        if (youtubeShareId) {
+            youtubeId = youtubeShareId
+        } else if (youtubeBrowserId) {
+            youtubeId = youtubeBrowserId
         } else {
             setVideoAdded(<div className="fail">Video not added!  Please enter a valid url</div>)
+            return
         }
+        getYoutubeVideoById(youtubeId)
+            .then((response) => {
+                if (response.items[0]) {
+                    addSavedVideo({
+                        userId: parseInt(localStorage.getItem("tv_user")),
+                        title: response.items[0].snippet.title,
+                        ytId: youtubeId,
+                        ytChannelId: response.items[0].snippet.channelId,
+                        channelName: response.items[0].snippet.channelTitle,
+                        duration: response.items[0].contentDetails.duration,
+                        thumbnail: response.items[0].snippet.thumbnails.default.url,
+                        timestamp: Date.now()
+                    })
+                        .then(() => {
+                            setVideo({ url: "" })
+                            setVideoAdded(null)
+                            getSavedVideosByUser(parseInt(localStorage.getItem("tv_user")))
+                        })
+                } else {
+                    setVideoAdded(<div className="fail">Video not found</div>)
+                }
+            })
     }
 
     return (

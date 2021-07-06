@@ -70,7 +70,7 @@ export const NewUserChannels = () => {
     return (
         <>
 
-            <div className="add-channels-form">
+            <div className="add-form">
                 <h3 className="">Add the URLs of up to 5 Youtube Channels that you like</h3>
                 <div className="center">You can also skip this for now, and do it later.</div>
                 <div className="addInput">
