@@ -4,20 +4,21 @@ export const SavedVideoContext = createContext()
 
 export const SavedVideoProvider = (props) => {
     const [savedUserVideos, setSavedUserVideos] = useState([])
+    const API = "http://tunevids-dev.us-east-2.elasticbeanstalk.com/api"
 
     const getSavedVideosByUser = userId => {
-        return fetch(`http://localhost:8088/savedVideos?userId=${userId}`)
+        return fetch(`${API}/savedVideos?userId=${userId}`)
         .then(res => res.json())
         .then(setSavedUserVideos)
     }
     
     const getSavedVideoById = savedVideoId => {
-        return fetch(`http://localhost:8088/savedVideos/${savedVideoId}`)
+        return fetch(`${API}/savedVideos/${savedVideoId}`)
         .then(res => res.json())
     }
 
     const addSavedVideo = savedVideoObj => {
-        return fetch("http://localhost:8088/savedVideos", {
+        return fetch(`${API}/savedVideos`, {
             method: "POST",
             headers: {
                 "Content-Type": "application/json"
@@ -27,7 +28,7 @@ export const SavedVideoProvider = (props) => {
     }
 
     const updateSavedVideo = savedVideo => {
-        return fetch(`http://localhost:8088/savedVideos/${savedVideo.id}`, {
+        return fetch(`${API}/savedVideos/${savedVideo.id}`, {
           method: "PUT",
           headers: {
             "Content-Type": "application/json"
@@ -37,7 +38,7 @@ export const SavedVideoProvider = (props) => {
       }
 
     const deleteSavedVideo = savedVideoId => {
-        return fetch(`http://localhost:8088/savedVideos/${savedVideoId}`, {
+        return fetch(`${API}/savedVideos/${savedVideoId}`, {
             method: "DELETE"
         })
     }

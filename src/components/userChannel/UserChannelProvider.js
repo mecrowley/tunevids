@@ -4,20 +4,21 @@ export const UserChannelContext = createContext()
 
 export const UserChannelProvider = (props) => {
     const [userChannels, setUserChannels] = useState([])
+    const API = "http://tunevids-dev.us-east-2.elasticbeanstalk.com/api"
 
     const getUserChannelsByUser = userId => {
-        return fetch(`http://localhost:8088/userChannels?userId=${userId}`)
+        return fetch(`${API}/userChannels?userId=${userId}`)
         .then(res => res.json())
         .then(setUserChannels)
     }
     
     const getUserChannelById = userChannelId => {
-        return fetch(`http://localhost:8088/userChannels/${userChannelId}`)
+        return fetch(`${API}/userChannels/${userChannelId}`)
         .then(res => res.json())
     }
 
     const addUserChannel = userChannelObj => {
-        return fetch("http://localhost:8088/userChannels", {
+        return fetch(`${API}/userChannels`, {
             method: "POST",
             headers: {
                 "Content-Type": "application/json"
@@ -27,7 +28,7 @@ export const UserChannelProvider = (props) => {
     }
 
     const deleteUserChannel = userChannelId => {
-        return fetch(`http://localhost:8088/userChannels/${userChannelId}`, {
+        return fetch(`${API}/userChannels/${userChannelId}`, {
             method: "DELETE"
         })
     }

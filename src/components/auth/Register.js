@@ -14,7 +14,7 @@ export const Register = (props) => {
     const { addPlaylistVideo } = useContext(PlaylistVideoContext)
 
     const existingUserCheck = () => {
-        return fetch(`http://localhost:8088/users?email=${email.current.value}`)
+        return fetch(`http://tunevids-dev.us-east-2.elasticbeanstalk.com/api/users?email=${email.current.value}`)
             .then(res => res.json())
             .then(user => !!user.length)
     }
@@ -26,7 +26,7 @@ export const Register = (props) => {
         existingUserCheck()
             .then((userExists) => {
                 if (!userExists) {
-                    fetch("http://localhost:8088/users", {
+                    fetch("http://tunevids-dev.us-east-2.elasticbeanstalk.com/api/users", {
                         method: "POST",
                         headers: {
                             "Content-Type": "application/json"

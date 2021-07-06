@@ -5,15 +5,16 @@ export const UserContext = createContext()
 export const UserProvider = (props) => {
     const [users, setUsers] = useState([])
     const [user, setUser] = useState({})
+    const API = "http://tunevids-dev.us-east-2.elasticbeanstalk.com/api"
 
     const getUsers = () => {
-        return fetch("http://localhost:8088/users")
+        return fetch(`${API}/users`)
         .then(res => res.json())
         .then(setUsers)
     }
 
     const getUserById = userId => {
-        return fetch(`http://localhost:8088/users/${userId}`)
+        return fetch(`${API}/users/${userId}`)
         .then(res => res.json())
         .then(setUser)
     }

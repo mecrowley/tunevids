@@ -5,9 +5,10 @@ export const PlaylistVideoContext = createContext()
 export const PlaylistVideoProvider = (props) => {
     const [playlistVideos, setPlaylistVideos] = useState([{title: ""}])
     const [initialize, setInitialize] = useState(false)
+    const API = "http://tunevids-dev.us-east-2.elasticbeanstalk.com/api"
 
     const getPlaylistVideosByUser = userId => {
-        return fetch(`http://localhost:8088/playlistVideos?userId=${userId}`)
+        return fetch(`${API}/playlistVideos?userId=${userId}`)
             .then(res => res.json())
             .then((response) => {
                 setPlaylistVideos(response)
@@ -15,7 +16,7 @@ export const PlaylistVideoProvider = (props) => {
     }
 
     const getPlaylistVideosByPlaylistId = playlistId => {
-        return fetch(`http://localhost:8088/playlistVideos?playlistId=${playlistId}`)
+        return fetch(`${API}/playlistVideos?playlistId=${playlistId}`)
             .then(res => res.json())
             .then((response) => {
                 setPlaylistVideos(response)
@@ -23,7 +24,7 @@ export const PlaylistVideoProvider = (props) => {
     }
 
     const addToGenPlaylist = (video) => {
-        return fetch(`http://localhost:8088/playlistVideos/${video.id}`, {
+        return fetch(`${API}/playlistVideos/${video.id}`, {
             method: "PUT",
             headers: {
                 "Content-Type": "application/json"
@@ -34,7 +35,7 @@ export const PlaylistVideoProvider = (props) => {
     }
 
     const addPlaylistVideo = videoObj => {
-        return fetch("http://localhost:8088/playlistVideos", {
+        return fetch(`${API}/playlistVideos`, {
             method: "POST",
             headers: {
                 "Content-Type": "application/json"
@@ -44,7 +45,7 @@ export const PlaylistVideoProvider = (props) => {
     }
 
     const deletePlaylistVideo = videoId => {
-        return fetch(`http://localhost:8088/playlistVideos/${videoId}`, {
+        return fetch(`${API}/playlistVideos/${videoId}`, {
             method: "DELETE"
         })
     }
