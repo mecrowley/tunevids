@@ -37,20 +37,23 @@ export const UserChannelList = () => {
                 getYoutubeChannelById(channelId)
                     .then((response) => {
                         if (response.items) {
-                            addUserChannel({
-                                userId: parseInt(localStorage.getItem("tv_user")),
-                                title: response.items[0].snippet.title,
-                                ytId: response.items[0].id,
-                                uploadsId: response.items[0].contentDetails.relatedPlaylists.uploads,
-                                thumbnail: response.items[0].snippet.thumbnails.default.url,
-                                timestamp: Date.now()
-                            })
-                                .then(() => {
-                                    setChannel({ url: "" })
-                                    setChannelAdded(null)
-                                    getUserChannelsByUser(parseInt(localStorage.getItem("tv_user")))
+                            if (response.items[0].statistics.videoCount === "0") {
+                                setChannelAdded(<div className="fail">Channel does not have any videos uploaded</div>)
+                            } else {
+                                addUserChannel({
+                                    userId: parseInt(localStorage.getItem("tv_user")),
+                                    title: response.items[0].snippet.title,
+                                    ytId: response.items[0].id,
+                                    uploadsId: response.items[0].contentDetails.relatedPlaylists.uploads,
+                                    thumbnail: response.items[0].snippet.thumbnails.default.url,
+                                    timestamp: Date.now()
                                 })
-
+                                    .then(() => {
+                                        setChannel({ url: "" })
+                                        setChannelAdded(null)
+                                        getUserChannelsByUser(parseInt(localStorage.getItem("tv_user")))
+                                    })
+                            }
                         } else {
                             setChannelAdded(<div className="fail">Channel not found</div>)
                         }
@@ -63,7 +66,10 @@ export const UserChannelList = () => {
                     if (response.items) {
                         if (userChannels.find(c => c.ytId === response.items[0].id)) {
                             setChannelAdded(<div className="fail">Channel already saved</div>)
+                        } else if (response.items[0].statistics.videoCount === "0") {
+                            setChannelAdded(<div className="fail">Channel does not have any videos uploaded</div>)
                         } else {
+                            console.log(response.items[0].statistics.videoCount)
                             addUserChannel({
                                 userId: parseInt(localStorage.getItem("tv_user")),
                                 title: response.items[0].snippet.title,
