@@ -50,28 +50,33 @@ export const SavedVideoList = () => {
             setVideoAdded(<div className="fail">Not a valid video url</div>)
             return
         }
-        getYoutubeVideoById(youtubeId)
-            .then((response) => {
-                if (response.items[0]) {
-                    addSavedVideo({
-                        userId: parseInt(localStorage.getItem("tv_user")),
-                        title: response.items[0].snippet.title,
-                        ytId: youtubeId,
-                        ytChannelId: response.items[0].snippet.channelId,
-                        channelName: response.items[0].snippet.channelTitle,
-                        duration: response.items[0].contentDetails.duration,
-                        thumbnail: response.items[0].snippet.thumbnails.default.url,
-                        timestamp: Date.now()
-                    })
-                        .then(() => {
-                            setVideo({ url: "" })
-                            setVideoAdded(null)
-                            getSavedVideosByUser(parseInt(localStorage.getItem("tv_user")))
+
+        if (savedUserVideos.find(v => v.ytId === youtubeId)) {
+            setVideoAdded(<div className="fail">Video already saved</div>)
+        } else {
+            getYoutubeVideoById(youtubeId)
+                .then((response) => {
+                    if (response.items[0]) {
+                        addSavedVideo({
+                            userId: parseInt(localStorage.getItem("tv_user")),
+                            title: response.items[0].snippet.title,
+                            ytId: youtubeId,
+                            ytChannelId: response.items[0].snippet.channelId,
+                            channelName: response.items[0].snippet.channelTitle,
+                            duration: response.items[0].contentDetails.duration,
+                            thumbnail: response.items[0].snippet.thumbnails.default.url,
+                            timestamp: Date.now()
                         })
-                } else {
-                    setVideoAdded(<div className="fail">Video not found</div>)
-                }
-            })
+                            .then(() => {
+                                setVideo({ url: "" })
+                                setVideoAdded(null)
+                                getSavedVideosByUser(parseInt(localStorage.getItem("tv_user")))
+                            })
+                    } else {
+                        setVideoAdded(<div className="fail">Video not found</div>)
+                    }
+                })
+        }
     }
 
     return (
