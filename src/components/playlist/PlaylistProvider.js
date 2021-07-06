@@ -4,6 +4,7 @@ export const PlaylistContext = createContext()
 
 export const PlaylistProvider = (props) => {
     const [playlist, setPlaylist] = useState({})
+    const [playlistWarning, setPlaylistWarning] = useState(null)
 
     const getPlaylistsByUser = userId => {
         return fetch(`http://localhost:8088/playlists?userId=${userId}`)
@@ -45,7 +46,7 @@ export const PlaylistProvider = (props) => {
 
     return (
         <PlaylistContext.Provider value={{
-            playlist, getPlaylistsByUser, getPlaylistById, addPlaylist, editPlaylist, deletePlaylist
+            playlist, getPlaylistsByUser, getPlaylistById, addPlaylist, editPlaylist, deletePlaylist, playlistWarning, setPlaylistWarning
         }}>
             {props.children}
         </PlaylistContext.Provider>

@@ -24,60 +24,69 @@ export const UserChannelList = () => {
     }
 
     const handleAddChannel = () => {
-            const channelURL = channel.url
-            const channelURLsplit = channelURL.split("/")
-            const hasChannelId = channelURLsplit.includes("channel")
-            const hasChannelUserName = channelURLsplit.includes("user")
-            const hasCustomName = channelURLsplit.includes("c")
-            if (hasChannelId) {
-                const channelId = channelURLsplit[channelURLsplit.indexOf("channel") + 1]
+        const channelURL = channel.url
+        const channelURLsplit = channelURL.split("/")
+        const hasChannelId = channelURLsplit.includes("channel")
+        const hasChannelUserName = channelURLsplit.includes("user")
+        const hasCustomName = channelURLsplit.includes("c")
+        if (hasChannelId) {
+            const channelId = channelURLsplit[channelURLsplit.indexOf("channel") + 1]
+            if (userChannels.find(c => c.ytId === channelId)) {
+                setChannelAdded(<div className="fail">Channel already saved</div>)
+            } else {
                 getYoutubeChannelById(channelId)
-            .then((response) => {
-                if (response.items) {
-                    addUserChannel({
-                        userId: parseInt(localStorage.getItem("tv_user")),
-                        title: response.items[0].snippet.title,
-                        ytId: response.items[0].id,
-                        uploadsId: response.items[0].contentDetails.relatedPlaylists.uploads,
-                        thumbnail: response.items[0].snippet.thumbnails.default.url,
-                        timestamp: Date.now()
+                    .then((response) => {
+                        if (response.items) {
+                            addUserChannel({
+                                userId: parseInt(localStorage.getItem("tv_user")),
+                                title: response.items[0].snippet.title,
+                                ytId: response.items[0].id,
+                                uploadsId: response.items[0].contentDetails.relatedPlaylists.uploads,
+                                thumbnail: response.items[0].snippet.thumbnails.default.url,
+                                timestamp: Date.now()
+                            })
+                                .then(() => {
+                                    setChannel({ url: "" })
+                                    setChannelAdded(null)
+                                    getUserChannelsByUser(parseInt(localStorage.getItem("tv_user")))
+                                })
+
+                        } else {
+                            setChannelAdded(<div className="fail">Channel not found</div>)
+                        }
                     })
-                    .then(() => {
-                        setChannel({ url: "" })
-                        setChannelAdded(null)
-                        getUserChannelsByUser(parseInt(localStorage.getItem("tv_user")))
-                    })
-                } else {
-                    setChannelAdded(<div className="fail">Channel not found</div>)
-                }
-            })
-            } else if (hasChannelUserName) {
-                const channelUserName = channelURLsplit[channelURLsplit.indexOf("user") + 1]
-                getYoutubeChannelByUserName(channelUserName)
-            .then((response) => {
-                if (response.items) {
-                    addUserChannel({
-                        userId: parseInt(localStorage.getItem("tv_user")),
-                        title: response.items[0].snippet.title,
-                        ytId: response.items[0].id,
-                        uploadsId: response.items[0].contentDetails.relatedPlaylists.uploads,
-                        thumbnail: response.items[0].snippet.thumbnails.default.url,
-                        timestamp: Date.now()
-                    })
-                    .then(() => {
-                        setChannel({ url: "" })
-                        setChannelAdded(null)
-                        getUserChannelsByUser(parseInt(localStorage.getItem("tv_user")))
-                    })
-                } else {
-                    setChannelAdded(<div className="fail">Channel not found</div>)
-                }
-            })
-            } else if (hasCustomName) {
-                setChannelAdded(<div className="fail">Cannot add Channel with custom name in url</div>)
-            } else if (!hasChannelId && !hasChannelUserName && !hasCustomName) {
-                setChannelAdded(<div className="fail">Channel not added! Please enter a valid url</div>)
             }
+        } else if (hasChannelUserName) {
+            const channelUserName = channelURLsplit[channelURLsplit.indexOf("user") + 1]
+            getYoutubeChannelByUserName(channelUserName)
+                .then((response) => {
+                    if (response.items) {
+                        if (userChannels.find(c => c.ytId === response.items[0].id)) {
+                            setChannelAdded(<div className="fail">Channel already saved</div>)
+                        } else {
+                            addUserChannel({
+                                userId: parseInt(localStorage.getItem("tv_user")),
+                                title: response.items[0].snippet.title,
+                                ytId: response.items[0].id,
+                                uploadsId: response.items[0].contentDetails.relatedPlaylists.uploads,
+                                thumbnail: response.items[0].snippet.thumbnails.default.url,
+                                timestamp: Date.now()
+                            })
+                                .then(() => {
+                                    setChannel({ url: "" })
+                                    setChannelAdded(null)
+                                    getUserChannelsByUser(parseInt(localStorage.getItem("tv_user")))
+                                })
+                        }
+                    } else {
+                        setChannelAdded(<div className="fail">Channel not found</div>)
+                    }
+                })
+        } else if (hasCustomName) {
+            setChannelAdded(<div className="fail">Cannot add Channel with custom name in url</div>)
+        } else if (!hasChannelId && !hasChannelUserName && !hasCustomName) {
+            setChannelAdded(<div className="fail">Channel not added! Please enter a valid url</div>)
+        }
 
     }
 
@@ -92,8 +101,8 @@ export const UserChannelList = () => {
                     <input type="text" id="url" className="input-field" required autoFocus placeholder="Channel url" value={channel.url} onChange={handleControlledInputChange} />
                     <button className="addButton" onClick={handleAddChannel}>
                         Submit
-            </button>
-            {channelAdded}
+                    </button>
+                    {channelAdded}
                 </fieldset>
             </div>
 
@@ -104,20 +113,20 @@ export const UserChannelList = () => {
                             <>
                                 <div className="channel">
                                     <div className="title">
-                                    <h4>{c.title}</h4>
+                                        <h4>{c.title}</h4>
                                     </div>
                                     <div className="thumbnail">
-                                    <img className="thumbnail" src={`${c.thumbnail}`} />
+                                        <img className="thumbnail" src={`${c.thumbnail}`} />
                                     </div>
                                     <div>
-                                    <button className="button" onClick={() => {
-                                        deleteUserChannel(c.id)
-                                            .then(() => {
-                                                getUserChannelsByUser(parseInt(localStorage.getItem("tv_user")))
-                                            })
-                                    }}>
-                                        Remove
-                                    </button>
+                                        <button className="button" onClick={() => {
+                                            deleteUserChannel(c.id)
+                                                .then(() => {
+                                                    getUserChannelsByUser(parseInt(localStorage.getItem("tv_user")))
+                                                })
+                                        }}>
+                                            Remove
+                                        </button>
                                     </div>
                                 </div>
                             </>

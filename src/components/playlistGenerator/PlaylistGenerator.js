@@ -11,12 +11,15 @@ export const PlaylistGenerator = () => {
     const { user, getUserById } = useContext(UserContext)
     const { getSavedVideosByUser, savedUserVideos } = useContext(SavedVideoContext)
     const { getUserChannelsByUser, userChannels } = useContext(UserChannelContext)
-    const { getPlaylistsByUser, addPlaylist } = useContext(PlaylistContext)
+    const { getPlaylistsByUser, addPlaylist, playlistWarning, setPlaylistWarning } = useContext(PlaylistContext)
     const { getPlaylistVideosByPlaylistId, playlistVideos, addPlaylistVideo, setInitialize } = useContext(PlaylistVideoContext)
     const [playlists, setPlaylists] = useState([])
     const [playlistSaved, setPlaylistSaved] = useState(false)
-    const [channelWarning, setChannelWarning] = useState(null)
 
+    useEffect(() => {
+        setPlaylistWarning(null)
+    }, [])
+    
     useEffect(() => {
         getUserById(parseInt(localStorage.getItem("tv_user")))
             .then(getSavedVideosByUser(parseInt(localStorage.getItem("tv_user"))))
@@ -77,12 +80,12 @@ export const PlaylistGenerator = () => {
                     <button classname="playlistGenButton" onClick={event => {
                         event.preventDefault()
                         if (userChannels.length > 4) {
-                            setChannelWarning(null)
+                            setPlaylistWarning(null)
                             setInitialize(true)
-                    } else {setChannelWarning(<div className="fail">User must have at least 5 Channels saved to generate new playlist</div>)}
+                    } else {setPlaylistWarning(<div className="fail">You must have at least 5 Channels saved to generate a new playlist</div>)}
                     }}>Generate New Playlist</button>
                     </div>
-                    {channelWarning}
+                    {playlistWarning}
                 </div>
             </div>
         </>

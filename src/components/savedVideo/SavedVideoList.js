@@ -47,7 +47,7 @@ export const SavedVideoList = () => {
         } else if (youtubeBrowserId) {
             youtubeId = youtubeBrowserId
         } else {
-            setVideoAdded(<div className="fail">Video not added!  Please enter a valid url</div>)
+            setVideoAdded(<div className="fail">Not a valid video url</div>)
             return
         }
         getYoutubeVideoById(youtubeId)

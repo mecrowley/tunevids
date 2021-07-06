@@ -5,9 +5,11 @@ import { YoutubeDataContext } from "../YoutubeDataProvider"
 import "./PlaylistGenerator.css"
 import FavoriteBorderIcon from '@material-ui/icons/FavoriteBorder';
 import FavoriteIcon from '@material-ui/icons/Favorite';
+import { PlaylistContext } from "../playlist/PlaylistProvider";
 
 export const GeneratePlaylist = ({ playlistVideos, userChannels, playlists }) => {
     const { savedUserVideos, getSavedVideosByUser, addSavedVideo, deleteSavedVideo } = useContext(SavedVideoContext)
+    const { setPlaylistWarning } = useContext(PlaylistContext)
     const { addToGenPlaylist, getPlaylistVideosByPlaylistId, addPlaylistVideo, initialize, setInitialize } = useContext(PlaylistVideoContext)
     const { getYtVideosByChannelId, getPage2ChannelVideos, getYoutubeVideoById } = useContext(YoutubeDataContext)
     const [page1ChannelVideos, setPage1ChannelVideos] = useState([])
@@ -22,21 +24,25 @@ export const GeneratePlaylist = ({ playlistVideos, userChannels, playlists }) =>
                 .then(response => {
                     setPage1ChannelVideos(response)
                     const channelsToGetPage2 = response.filter(r => r.nextPageToken)
-                    const videoPromises = channelsToGetPage2.map(c => {
-                        return getPage2ChannelVideos(c.items[0].snippet.playlistId, c.nextPageToken)
-                    })
-                    Promise.all(videoPromises)
-                        .then(videos => {
-                            setPage2ChannelVideos(videos)
+                    if (channelsToGetPage2.length > 0) {
+                        const videoPromises = channelsToGetPage2.map(c => {
+                            return getPage2ChannelVideos(c.items[0].snippet.playlistId, c.nextPageToken)
                         })
+                        Promise.all(videoPromises)
+                            .then(videos => {
+                                setPage2ChannelVideos(videos)
+                            })
+                    } else { setPage2ChannelVideos([{}]) }
                 })
             setInitialize(false)
         }
     }, [initialize])
 
     useEffect(() => {
-
-        if (page2ChannelVideos.length > 1) {
+        const page1count = []
+        page1ChannelVideos.forEach(c => c.items.forEach(v => page1count.push(v)))
+        if (page2ChannelVideos.length > 0 &&
+            (page1count.length + savedUserVideos.length) > 40) {
 
             const getRandomInt = max => {
                 return Math.floor(Math.random() * max);
@@ -70,9 +76,15 @@ export const GeneratePlaylist = ({ playlistVideos, userChannels, playlists }) =>
 
                 while (filteredPlaylistVideos.length < numberOfVideosToAdd) {
 
-                    page2ChannelVideos.forEach(videosObj => {
-                        newPlaylistVideos.push(videosObj.items[getRandomInt(videosObj.items.length)])
-                    })
+                    if (page2ChannelVideos.length > 1) {
+                        page2ChannelVideos.forEach(videosObj => {
+                            newPlaylistVideos.push(videosObj.items[getRandomInt(videosObj.items.length)])
+                        })
+                    } else {
+                        page1ChannelVideos.forEach(videosObj => {
+                            newPlaylistVideos.push(videosObj.items[getRandomInt(videosObj.items.length)])
+                        })
+                    }
 
                     if (newPlaylistVideos.length < numberOfVideosToAdd) {
                         page1ChannelVideos.forEach(videosObj => {
@@ -99,9 +111,16 @@ export const GeneratePlaylist = ({ playlistVideos, userChannels, playlists }) =>
                         filteredPlaylistVideos.splice(getRandomInt(filteredPlaylistVideos.length), 1)
                     }
                 } else if (numberOfVideosToDelete < 0) {
-                    page2ChannelVideos.forEach(videosObj => {
-                        newPlaylistVideos.push(videosObj.items[getRandomInt(videosObj.items.length)])
-                    })
+
+                    if (page2ChannelVideos.length > 1) {
+                        page2ChannelVideos.forEach(videosObj => {
+                            newPlaylistVideos.push(videosObj.items[getRandomInt(videosObj.items.length)])
+                        })
+                    } else {
+                        page1ChannelVideos.forEach(videosObj => {
+                            newPlaylistVideos.push(videosObj.items[getRandomInt(videosObj.items.length)])
+                        })
+                    }
 
                     filteredPlaylistVideos = [...new Set(newPlaylistVideos)]
 
@@ -134,11 +153,16 @@ export const GeneratePlaylist = ({ playlistVideos, userChannels, playlists }) =>
             const videopromises = newVideos.map(v => addToGenPlaylist(v))
             Promise.all(videopromises)
                 .then(() => setPage2ChannelVideos([]))
+                .then(() => setPlaylistWarning(null))
                 .then(() => getPlaylistVideosByPlaylistId(genPlaylistId))
             console.log(newVideos)
-        }
+        } else if ( page1ChannelVideos.length > 0 &&
+            page2ChannelVideos.length > 0) {
+                setPage2ChannelVideos([])
+                setPlaylistWarning(<div className="fail">Not enough data provided to generate a new playlist. Please try saving more videos or channels.</div>)
+        } else {return}
     }, [page2ChannelVideos])
-    
+
 
     return (
         <>
@@ -183,13 +207,13 @@ export const GeneratePlaylist = ({ playlistVideos, userChannels, playlists }) =>
                             <div className="dropdown">
                                 <select name="playlistId" id="playlistId" className="dropdown"
                                     onChange={(event) => {
-                                                addPlaylistVideo({
-                                                    playlistId: parseInt(event.target.value),
-                                                    userId: parseInt(localStorage.getItem("tv_user")),
-                                                    title: v.title,
-                                                    ytId: v.ytId,
-                                                    thumbnail: v.thumbnail
-                                                })
+                                        addPlaylistVideo({
+                                            playlistId: parseInt(event.target.value),
+                                            userId: parseInt(localStorage.getItem("tv_user")),
+                                            title: v.title,
+                                            ytId: v.ytId,
+                                            thumbnail: v.thumbnail
+                                        })
                                     }}>
                                     <option value="0">Add to playlist</option>
                                     {
