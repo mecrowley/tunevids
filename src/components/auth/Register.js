@@ -47,7 +47,7 @@ export const Register = (props) => {
                                     timestamp: Date.now()
                                 })
                                 .then(playlist => {
-                                    for (let i = 0; i < 50; i++) {
+                                    for (let i = 0; i < 40; i++) {
                                         addPlaylistVideo({
                                             playlistId: playlist.id,
                                             userId: createdUser.id,

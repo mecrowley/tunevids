@@ -1,4 +1,5 @@
 import React, { useContext, useState } from "react"
+import { useHistory } from "react-router-dom"
 import { SavedVideoContext } from "../savedVideo/SavedVideoProvider"
 import { YoutubeDataContext } from "../YoutubeDataProvider"
 
@@ -6,6 +7,7 @@ export const NewUserVideos = () => {
     const { addSavedVideo } = useContext(SavedVideoContext)
     const { getYoutubeVideoById } = useContext(YoutubeDataContext)
     const [video, setVideo] = useState({ url1: "", url2: "", url3: "", url4: "", url5: "" })
+    const history = useHistory()
 
     const handleControlledInputChange = (event) => {
         const newVideo = { ...video }
@@ -51,8 +53,10 @@ export const NewUserVideos = () => {
             })
         })
         ).then(() => {
-                setVideo({ url1: "", url2: "", url3: "", url4: "", url5: "" })
+                history.push("/register/addchannels")
             })
+        } else {
+            history.push("/register/addchannels")
         }
     }
 
