@@ -10,7 +10,7 @@ export const Login = props => {
     const history = useHistory()
 
     const existingUserCheck = () => {
-        return fetch(`http://tunevids-dev.us-east-2.elasticbeanstalk.com/api/users?email=${email.current.value}`)
+        return fetch(`http://localhost:8088/users?email=${email.current.value}`)
             .then(res => res.json())
             .then(user => user.length ? user[0] : false)
     }
@@ -31,10 +31,10 @@ export const Login = props => {
 
     return (
         <main className="container--login">
-            {/* <dialog className="dialog dialog--auth" ref={existDialog}>
+            <dialog className="dialog dialog--auth" ref={existDialog}>
                 <div>User does not exist</div>
                 <button className="button--close" onClick={e => existDialog.current.close()}>Close</button>
-            </dialog> */}
+            </dialog>
 
             <section>
                 <h1>Tune Vids</h1>

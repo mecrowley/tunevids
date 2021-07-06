@@ -2,10 +2,6 @@
   "name": "tunevids",
   "version": "0.1.0",
   "description": "Simple json-server database to deploy to the cloud",
-  "main": "server.js",
-  "keywords": [
-    "json-server, node, REST API"
-  ],
   "author": "NSS Student",
   "license": "ISC",
   "private": true,

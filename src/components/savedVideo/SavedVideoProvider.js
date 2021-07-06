@@ -4,7 +4,7 @@ export const SavedVideoContext = createContext()
 
 export const SavedVideoProvider = (props) => {
     const [savedUserVideos, setSavedUserVideos] = useState([])
-    const API = "http://tunevids-dev.us-east-2.elasticbeanstalk.com/api"
+    const API = "http://localhost:8088"
 
     const getSavedVideosByUser = userId => {
         return fetch(`${API}/savedVideos?userId=${userId}`)

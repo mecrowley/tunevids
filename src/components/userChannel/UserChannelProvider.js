@@ -4,7 +4,7 @@ export const UserChannelContext = createContext()
 
 export const UserChannelProvider = (props) => {
     const [userChannels, setUserChannels] = useState([])
-    const API = "http://tunevids-dev.us-east-2.elasticbeanstalk.com/api"
+    const API = "http://localhost:8088"
 
     const getUserChannelsByUser = userId => {
         return fetch(`${API}/userChannels?userId=${userId}`)

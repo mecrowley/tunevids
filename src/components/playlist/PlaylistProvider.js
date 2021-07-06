@@ -5,7 +5,7 @@ export const PlaylistContext = createContext()
 export const PlaylistProvider = (props) => {
     const [playlist, setPlaylist] = useState({})
     const [playlistWarning, setPlaylistWarning] = useState(null)
-    const API = "http://tunevids-dev.us-east-2.elasticbeanstalk.com/api"
+    const API = "http://localhost:8088"
 
     const getPlaylistsByUser = userId => {
         return fetch(`${API}/playlists?userId=${userId}`)

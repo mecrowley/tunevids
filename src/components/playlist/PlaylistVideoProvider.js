@@ -5,7 +5,7 @@ export const PlaylistVideoContext = createContext()
 export const PlaylistVideoProvider = (props) => {
     const [playlistVideos, setPlaylistVideos] = useState([{title: ""}])
     const [initialize, setInitialize] = useState(false)
-    const API = "http://tunevids-dev.us-east-2.elasticbeanstalk.com/api"
+    const API = "http://localhost:8088"
 
     const getPlaylistVideosByUser = userId => {
         return fetch(`${API}/playlistVideos?userId=${userId}`)
